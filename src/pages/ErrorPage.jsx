@@ -1,5 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import Button from "../components/shared/Button";
+import { Link, useNavigate } from "react-router-dom";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ const ErrorPage = () => {
           <div className="flex items-center w-full mt-6 gap-x-3 shrink-0 sm:w-auto">
             <button
               onClick={() => navigate(-1)}
-              className="flex items-center justify-center w-1/2 px-5 py-[5px] text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto   hover:bg-gray-100 "
+              className="flex items-center justify-center px-3 gap-2 text-black rounded-lg py-2 border"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +35,9 @@ const ErrorPage = () => {
               <span>Go back</span>
             </button>
 
-            <Button label={"Take Me Home"} onClick={() => navigate("/")} />
+            <Link className="px-3 bg-red-600 text-white rounded-lg py-2">
+              Take me home
+            </Link>
           </div>
         </div>
       </div>

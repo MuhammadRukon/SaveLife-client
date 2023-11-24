@@ -11,12 +11,12 @@ const MenuDropdown = () => {
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         {/* menus */}
-        <div className="hidden md:block">
+        <div className="hidden md:block transition delay-500">
           <Navlinks />
         </div>
         {/* profile */}
         {user && (
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center ">
             <img
               className="rounded-full"
               referrerPolicy="no-referrer"

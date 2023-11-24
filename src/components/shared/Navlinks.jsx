@@ -8,33 +8,33 @@ const Navlinks = () => {
     <>
       <NavLink
         to="/"
-        className="block md:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+        className="block md:hidden px-4 py-3 rounded-lg relative transition font-semibold"
       >
         Home
       </NavLink>
       {user && (
         <NavLink
           to="/dashboard"
-          className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+          className="px-4 py-3 relative rounded-lg transition font-semibold"
         >
           Dashboard
         </NavLink>
       )}
       <NavLink
         to="/donation-request"
-        className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+        className="px-4 py-3 relative rounded-lg transition font-semibold"
       >
         Donation request
       </NavLink>
       <NavLink
         to="/blog"
-        className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+        className="px-4 py-3 relative rounded-lg transition font-semibold"
       >
         Blog
       </NavLink>
       <NavLink
-        to="/dashboard"
-        className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+        to="/fundings"
+        className="px-4 py-3 relative rounded-lg transition font-semibold"
       >
         Fundings
       </NavLink>
@@ -42,7 +42,7 @@ const Navlinks = () => {
       {user && (
         <NavLink
           to="/logout"
-          className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+          className="px-4 py-3 relative rounded-lg transition font-semibold"
         >
           Logout
         </NavLink>
@@ -51,13 +51,13 @@ const Navlinks = () => {
         <>
           <NavLink
             to="/login"
-            className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+            className="px-4 py-3 relative rounded-lg transition font-semibold"
           >
             Login
           </NavLink>
           <NavLink
             to="/signup"
-            className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+            className="px-4 py-3 relative rounded-lg transition font-semibold"
           >
             signup
           </NavLink>
