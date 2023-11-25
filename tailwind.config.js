@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#003FBA",
-        secondary: "#34a1e5",
+        primary: "#DC2626",
+        secondary: "#022E4B",
       },
       fontFamily: {
         primary: "'Roboto Slab', serif",

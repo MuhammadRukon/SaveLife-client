@@ -6,15 +6,16 @@ const Banner = () => {
     <div
       className="hero "
       style={{
-        backgroundImage:
-          "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
+        backgroundImage: "url(https://i.ibb.co/DMpvGHK/bloodbanner.jpg)",
       }}
     >
-      <div className="hero-overlay bg-opacity-60 py-56"></div>
-      <div className="hero-content text-center text-neutral-content">
+      {/* <div className="hero-overlay bg-opacity-60 py-56"></div> */}
+      <div className="hero-content text-center text-neutral-content py-56">
         <div className="max-w-lg">
-          <h1 className="mb-5 text-5xl font-primary font-bold">Donate Blood</h1>
-          <p className="mb-5 text-lg tracking-wider italic font-semibold">
+          <h1 className="mb-5 text-5xl font-primary text-secondary font-bold">
+            Donate Blood
+          </h1>
+          <p className="mb-5 text-lg tracking-wider italic text-secondary font-semibold">
             Your donation can save a life.
           </p>
 

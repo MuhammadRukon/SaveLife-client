@@ -1,18 +1,17 @@
-import axios from "axios";
 import axiosSecure from ".";
 
 //save user to db
 export const saveUser = async (user) => {
   const currentUser = {
     email: user.email,
-    name: user.displayName,
-    image: user.photoURL,
-    role: "admin",
+    displayName: user.displayName,
+    photoURL: user.photoURL,
+    role: "donor",
     status: "active",
     district: user.district,
     upazila: user.upazila,
     bloodGroup: user.bloodGroup,
   };
-  const { data } = await axiosSecure.post(`/users/${user?.email}`);
+  const { data } = await axiosSecure.post("/users", currentUser);
   return data;
 };

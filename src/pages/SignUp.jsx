@@ -1,10 +1,56 @@
 import { Link } from "react-router-dom";
 import GetLocation from "../components/shared/GetLocation";
 import { useState } from "react";
+import { saveUser } from "../api/auth";
+import useAuth from "../hooks/useAuth";
+import { imageUpload } from "../api/utils";
 
 const SignUp = () => {
   const [location, setLocation] = useState({});
-  console.log(location);
+  const [errormsg, setErrorMsg] = useState("");
+  const [password, setPassword] = useState("");
+  const { createUser, updateUserProfile } = useAuth();
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    setErrorMsg("");
+    const displayName = e.target.name.value;
+    // image
+    const image = e.target.image.files[0];
+    const district = location?.district;
+    const upazila = location?.upazila;
+    const email = e.target.email.value;
+    const bloodGroup = location?.bloodGroup;
+
+    if (e.target.password.value === e.target.confirmPassword.value) {
+      setPassword(e.target.password.value);
+    } else {
+      setErrorMsg("password doesn't match");
+      return;
+    }
+
+    try {
+      const imageData = await imageUpload(image);
+
+      // create user
+      const result = await createUser(email, password);
+      console.log(result);
+      // update user
+      await updateUserProfile(displayName, imageData?.data?.display_url);
+      // save user to database
+      const user = {
+        email,
+        displayName,
+        photoURL: imageData?.data?.display_url,
+        district,
+        upazila,
+        bloodGroup,
+      };
+      const saveUserDb = await saveUser(user);
+      console.log(saveUserDb);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex flex-col w-1/4 p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
@@ -13,6 +59,7 @@ const SignUp = () => {
           <p className="text-sm text-gray-400">Welcome to StayVista</p>
         </div>
         <form
+          onSubmit={handleSignUp}
           noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
@@ -89,8 +136,8 @@ const SignUp = () => {
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
               />
             </div>
+            <p className="-pt-2 h-3">{errormsg}</p>
           </div>
-
           <div>
             <button
               type="submit"
