@@ -24,7 +24,7 @@ const Banner = () => {
               to="/signup"
               className="bg-red-600 w-fit px-4 rounded-md py-3 text-white"
             >
-              Join as a donor
+              !user = Join as a donor.
             </Link>
             <Link
               to="/search-donors"

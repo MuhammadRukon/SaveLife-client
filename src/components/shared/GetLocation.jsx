@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
-const GetLocation = ({ location, setLocation }) => {
+const GetLocation = ({ location, setLocation, anotherEffect }) => {
   const [districts, setDistricts] = useState([]);
   const [upazila, setUpazila] = useState([]);
   const [effect, setEffect] = useState(false);
   useEffect(() => {
-    fetch("./districts.json")
+    fetch("/districts.json")
       .then((res) => res.json())
       .then((data) => setDistricts(data));
-  }, []);
+  }, [anotherEffect]);
   useEffect(() => {
-    fetch("./upazila.json")
+    fetch("/upazila.json")
       .then((res) => res.json())
       .then((data) => {
         if (location.district) {

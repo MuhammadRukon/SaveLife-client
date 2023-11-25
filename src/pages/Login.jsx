@@ -1,9 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import { useState } from "react";
 
 const Login = () => {
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [errormsg, setErrorMsg] = useState("");
+  const from = location?.state?.from?.pathname || "/";
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setErrorMsg("");
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    try {
+      await signIn(email, password);
+      navigate(from, { replace: true });
+    } catch (error) {
+      setErrorMsg(error.message);
+    }
+  };
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="flex flex-col w-1/4 p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
+      <div className="flex flex-col 2xl:w-1/4 p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Log In</h1>
           <p className="text-sm text-gray-400">
@@ -11,8 +30,7 @@ const Login = () => {
           </p>
         </div>
         <form
-          noValidate=""
-          action=""
+          onSubmit={handleLogin}
           className="space-y-6 ng-untouched ng-pristine ng-valid"
         >
           <div className="space-y-4">
@@ -46,6 +64,7 @@ const Login = () => {
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
               />
             </div>
+            <p className="-pt-2 h-3 text-red-700 italic text-sm">{errormsg}</p>
           </div>
 
           <div>

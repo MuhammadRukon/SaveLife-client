@@ -4,11 +4,14 @@ import ErrorPage from "../pages/ErrorPage";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Blog from "../pages/Blog";
-import Dashboard from "../pages/Dashboard";
 import Funding from "../pages/Funding";
 import DonationRequest from "../pages/DonationRequest";
 import Home from "../pages/Home";
 import SearchDonor from "../pages/SearchDonor";
+import PrivateRoute from "./PrivateRoute";
+import DashboardLayout from "../layouts/DashboardLayout";
+import DashboardHome from "../pages/dashboard/DashboardHome";
+import Profile from "../pages/dashboard/Profile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,7 +32,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/fundings",
-        element: <Funding />,
+        element: (
+          <PrivateRoute>
+            <Funding />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/donation-request",
@@ -40,7 +47,21 @@ const router = createBrowserRouter([
 
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "/dashboard",
+        element: <DashboardHome />,
+      },
+      {
+        path: "/dashboard/profile",
+        element: <Profile />,
+      },
+    ],
   },
 
   {

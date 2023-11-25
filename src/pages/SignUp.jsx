@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GetLocation from "../components/shared/GetLocation";
 import { useState } from "react";
 import { saveUser } from "../api/auth";
@@ -6,25 +6,40 @@ import useAuth from "../hooks/useAuth";
 import { imageUpload } from "../api/utils";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [location, setLocation] = useState({});
   const [errormsg, setErrorMsg] = useState("");
-  const [password, setPassword] = useState("");
+  let password;
   const { createUser, updateUserProfile } = useAuth();
   const handleSignUp = async (e) => {
     e.preventDefault();
     setErrorMsg("");
     const displayName = e.target.name.value;
-    // image
     const image = e.target.image.files[0];
     const district = location?.district;
     const upazila = location?.upazila;
     const email = e.target.email.value;
     const bloodGroup = location?.bloodGroup;
+    const firstpassword = e.target.password.value;
+    const confirmPassword = e.target.confirmPassword.value;
 
-    if (e.target.password.value === e.target.confirmPassword.value) {
-      setPassword(e.target.password.value);
+    if (firstpassword === confirmPassword) {
+      password = firstpassword || confirmPassword;
     } else {
       setErrorMsg("password doesn't match");
+      return;
+    }
+    if (password.length < 6) {
+      setErrorMsg("Password needs to be at least six characters");
+      return;
+    }
+
+    if (!/.*[A-Z].*/.test(password)) {
+      setErrorMsg("Password needs at least one capital letter");
+      return;
+    }
+    if (!/.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?].*/.test(password)) {
+      setErrorMsg("Password needs at least one special character");
       return;
     }
 
@@ -48,15 +63,16 @@ const SignUp = () => {
       const saveUserDb = await saveUser(user);
       console.log(saveUserDb);
     } catch (error) {
-      console.log(error.message);
+      setErrorMsg(error.message);
     }
+    navigate("/");
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="flex flex-col w-1/4 p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
+      <div className="flex flex-col 2xl:w-1/4 p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
-          <p className="text-sm text-gray-400">Welcome to StayVista</p>
+          <p className="text-sm text-gray-400">Welcome to SaveLife</p>
         </div>
         <form
           onSubmit={handleSignUp}
@@ -136,7 +152,7 @@ const SignUp = () => {
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
               />
             </div>
-            <p className="-pt-2 h-3">{errormsg}</p>
+            <p className="-pt-2 h-3 text-red-700 italic text-sm">{errormsg}</p>
           </div>
           <div>
             <button

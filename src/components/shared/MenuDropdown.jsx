@@ -12,7 +12,7 @@ const MenuDropdown = () => {
       <div className="flex flex-row items-center gap-3">
         {/* menus */}
         <div className="hidden md:block transition delay-500">
-          <Navlinks />
+          <Navlinks setIsOpen={setIsOpen} />
         </div>
         {/* profile */}
         {user && (

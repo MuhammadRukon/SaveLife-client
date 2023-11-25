@@ -1,5 +1,3 @@
-import { ScaleLoader } from "react-spinners";
-
 const Loader = ({ smallHeight }) => {
   return (
     <div
@@ -9,7 +7,7 @@ const Loader = ({ smallHeight }) => {
       justify-center 
       items-center `}
     >
-      <ScaleLoader size={100} color="red" />
+      <span className="loading loading-infinity loading-lg"></span>
     </div>
   );
 };

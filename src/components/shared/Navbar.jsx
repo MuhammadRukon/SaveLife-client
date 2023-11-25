@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
-import logoImg from "../../assets/logo.png";
 import Container from "./Container";
+import Logo from "./Logo";
 import MenuDropdown from "./MenuDropdown";
 
 const Navbar = () => {
@@ -11,10 +10,7 @@ const Navbar = () => {
         <Container>
           <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
             {/* Logo */}
-            <Link className="flex items-center gap-2" to="/">
-              <img src={logoImg} alt="logo" width="50" height="50" />
-              <p className="text-2xl font-bold font-primary">SaveLife</p>
-            </Link>
+            <Logo />
             {/* Dropdown Menu */}
             <MenuDropdown />
           </div>
