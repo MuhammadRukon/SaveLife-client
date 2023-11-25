@@ -7,7 +7,10 @@ import { imageUpload } from "../api/utils";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [location, setLocation] = useState({});
+  const [location, setLocation] = useState({
+    upazila: "Select Upazila",
+    district: "Select District",
+  });
   const [errormsg, setErrorMsg] = useState("");
   let password;
   const { createUser, updateUserProfile } = useAuth();

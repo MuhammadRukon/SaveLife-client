@@ -2,28 +2,32 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { updateUser } from "../../api/auth";
 import GetLocation from "../shared/GetLocation";
+import useAuth from "../../hooks/useAuth";
+import { imageUpload } from "../../api/utils";
 
 export default function UpdateUserModal({ closeModal, isOpen, email }) {
+  const { updateUserProfile } = useAuth();
   const [location, setLocation] = useState({});
   const [anotherEffect, setAnotherEffect] = useState(false);
   const handleUpdate = async (e) => {
     e.preventDefault();
     setAnotherEffect(!anotherEffect);
     const displayName = e.target.name.value;
-    // const image = e.target.image.files[0];
+    const image = e.target.image.files[0];
     const district = location?.district;
     const upazila = location?.upazila;
     const bloodGroup = location?.bloodGroup;
 
     try {
       // upload image
-      //   const imageData = await imageUpload(image);
+      const imageData = await imageUpload(image);
+      console.log(imageData);
       //   // update user
-      //   await updateUserProfile(displayName, imageData?.data?.display_url);
+      await updateUserProfile(displayName, imageData?.data?.display_url);
       //   // save user to database
       const user = {
         displayName,
-        // photoURL: imageData?.data?.display_url,
+        photoURL: imageData?.data?.display_url,
         district,
         upazila,
         bloodGroup,
@@ -31,6 +35,7 @@ export default function UpdateUserModal({ closeModal, isOpen, email }) {
       console.log(email);
       const saveUserDb = await updateUser(user, email);
       console.log(saveUserDb);
+      closeModal();
     } catch (error) {
       console.log(error.message);
     }
