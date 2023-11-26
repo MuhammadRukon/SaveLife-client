@@ -51,3 +51,30 @@ export const getStatus = async (email) => {
   const { data } = await axiosSecure(`/user/role/${email}`);
   return data.status;
 };
+// get user
+export const getUser = async (email) => {
+  const { data } = await axiosSecure(`/user/role/${email}`);
+  return data;
+};
+// post blog
+export const postBlog = async (blogInfo) => {
+  const blog = {
+    title: blogInfo.title,
+    photoURL: blogInfo.photoURL,
+    content: blogInfo.content,
+    status: "draft",
+  };
+  const { data } = await axiosSecure.post("/blogs/add-blog", blog);
+  return data;
+};
+// get all blogs
+export const getAllBlogs = async () => {
+  const { data } = await axiosSecure("/blogs");
+  return data;
+};
+
+// publish/upPublish blog
+export const updateBlogStatus = async (id, status) => {
+  const { data } = await axiosSecure.patch(`/blog/${id}`, status);
+  return data;
+};

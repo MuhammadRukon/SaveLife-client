@@ -6,9 +6,14 @@ import useAuth from "../../hooks/useAuth";
 import { imageUpload } from "../../api/utils";
 import toast from "react-hot-toast";
 
-export default function UpdateUserModal({ closeModal, isOpen, email }) {
+export default function UpdateUserModal({ data, closeModal, isOpen, email }) {
   const { updateUserProfile } = useAuth();
-  const [location, setLocation] = useState({});
+
+  const [location, setLocation] = useState({
+    district: data?.data?.district,
+    upazila: data?.data?.upazila,
+    bloodGroup: data?.data?.bloodGroup,
+  });
   const [anotherEffect, setAnotherEffect] = useState(false);
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -93,6 +98,7 @@ export default function UpdateUserModal({ closeModal, isOpen, email }) {
                           type="text"
                           name="name"
                           id="name"
+                          defaultValue={data?.data?.displayName}
                           placeholder="Enter Your Name Here"
                           className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
                           data-temp-mail-org="0"
@@ -117,12 +123,18 @@ export default function UpdateUserModal({ closeModal, isOpen, email }) {
                         setLocation={setLocation}
                       />
                     </div>
-                    <div>
+                    <div className="flex gap-2">
                       <button
                         type="submit"
                         className="bg-red-600 w-full rounded-md py-3 text-white"
                       >
                         Continue
+                      </button>
+                      <button
+                        onClick={closeModal}
+                        className="bg-secondary w-full rounded-md py-3 text-white"
+                      >
+                        cancel
                       </button>
                     </div>
                   </form>

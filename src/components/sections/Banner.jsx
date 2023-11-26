@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useRole from "../../hooks/useRole";
 
 const Banner = () => {
   const { user } = useAuth();
+  const [role] = useRole();
   return (
     <div
       className="hero "
@@ -25,7 +27,11 @@ const Banner = () => {
           <div className="space-x-4 font-semibold text-lg mt-10">
             {user ? (
               <button
-                onClick={() => toast("you are already a donor")}
+                onClick={() =>
+                  toast(
+                    `you are already ${role === "admin" ? "an" : "a"} ${role}`
+                  )
+                }
                 className="bg-red-600 w-fit px-4 rounded-md py-3 text-white"
               >
                 Join as a donor

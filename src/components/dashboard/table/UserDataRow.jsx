@@ -8,6 +8,7 @@ const UserDataRow = ({ user, refetch }) => {
   function closeModal() {
     setIsOpen(false);
   }
+
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -22,7 +23,7 @@ const UserDataRow = ({ user, refetch }) => {
         {user?.status ? (
           <p
             className={`${
-              user.status === "active" ? "text-green-500" : "text-yellow-500"
+              user.status === "active" ? "text-green-500" : "text-red-500"
             } whitespace-no-wrap`}
           >
             {user.status}
@@ -38,7 +39,7 @@ const UserDataRow = ({ user, refetch }) => {
             aria-hidden="true"
             className="absolute inset-0 bg-blue-200 opacity-50 rounded-lg"
           ></span>
-          <span onClick={() => setIsOpen(!isOpen)} className="relative ">
+          <span onClick={() => setIsOpen(!isOpen)} className="relative">
             Update Role
           </span>
         </span>

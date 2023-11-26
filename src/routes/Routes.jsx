@@ -15,6 +15,10 @@ import Profile from "../pages/dashboard/Profile";
 import ManageContent from "../pages/dashboard/ManageContent";
 import BloodDonationRequests from "../pages/dashboard/BloodDonationRequests";
 import Users from "../pages/dashboard/Users";
+import ManageContentHome from "../pages/dashboard/ManageContentHome";
+import AddBlog from "../pages/dashboard/AddBlog";
+import AdminRoute from "./AdminRoute";
+import VolunteerRoute from "./VolunteerRoute";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +32,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/blog",
-        element: <Blog />,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <Blog />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/search-donors",
@@ -63,19 +73,56 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <Profile />,
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "all-users",
-        element: <Users />,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <Users />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "content-management",
-        element: <ManageContent />,
+        element: (
+          <PrivateRoute>
+            <VolunteerRoute>
+              <ManageContent />
+            </VolunteerRoute>
+          </PrivateRoute>
+        ),
+
+        children: [
+          {
+            index: true,
+            element: <ManageContentHome />,
+          },
+          {
+            path: "add-blog",
+            element: (
+              <PrivateRoute>
+                <AdminRoute>
+                  <AddBlog />
+                </AdminRoute>
+              </PrivateRoute>
+            ),
+          },
+        ],
       },
       {
         path: "all-blood-donation-request",
-        element: <BloodDonationRequests />,
+        element: (
+          <PrivateRoute>
+            <BloodDonationRequests />
+          </PrivateRoute>
+        ),
       },
     ],
   },

@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
-const GetLocation = ({ location, setLocation }) => {
+const GetLocation = ({ location, setLocation, anotherEffect }) => {
   const [districts, setDistricts] = useState([]);
   const [upazila, setUpazila] = useState([]);
   const [effect, setEffect] = useState(false);
+  // district
   useEffect(() => {
     fetch("/districts.json")
       .then((res) => res.json())
       .then((data) => setDistricts(data));
-  }, []);
+  }, [anotherEffect]);
+  //  upazila
   useEffect(() => {
     fetch("/upazila.json")
       .then((res) => res.json())
@@ -30,7 +32,7 @@ const GetLocation = ({ location, setLocation }) => {
             setLocation({ ...location, district: e.target.value });
             setEffect(!effect);
           }}
-          defaultValue={location?.district}
+          value={location?.district}
           className="select select-bordered w-full focus:outline-none focus:border-rose-500 max-w-xs"
           name="district"
         >
@@ -43,7 +45,7 @@ const GetLocation = ({ location, setLocation }) => {
       {/* upazila */}
       <div className="w-[48%]">
         <select
-          defaultValue={location?.upazila}
+          value={location?.upazila}
           className="select select-bordered w-full focus:outline-none focus:border-rose-500 max-w-xs"
           name="upazila"
           onChange={(e) =>
@@ -59,7 +61,7 @@ const GetLocation = ({ location, setLocation }) => {
       {/* blood */}
       <div className="w-[48%]">
         <select
-          defaultValue="Select Blood Group"
+          value={location?.bloodGroup || "Select Blood Group"}
           className="select select-bordered w-full focus:outline-none focus:border-rose-500 max-w-xs"
           name="bloodgroup"
           onChange={(e) =>

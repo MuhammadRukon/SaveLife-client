@@ -11,20 +11,12 @@ import Logo from "../shared/Logo";
 import MenuItem from "./MenuItem";
 import toast from "react-hot-toast";
 import AdminMenu from "./AdminMenu";
+import VolunteerMenu from "./VolunteerMenu";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
-  //   const [toggle, setToggle] = useState(false);
   const [isActive, setActive] = useState(false);
   const [role] = useRole();
-  //   const role = "volunteer";
-
-  console.log("role", role);
-  //   For guest/host menu item toggle button
-  //   const toggleHandler = (event) => {
-  //     setToggle(event.target.checked);
-  //   };
-  // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
   };
@@ -60,17 +52,10 @@ const Sidebar = () => {
 
           {/* Nav Items */}
           <div className="flex flex-col justify-between text-secondary flex-1 mt-6">
-            {/* If a user is volunteer */}
-            {/* {role === "volunteer" && (
-              <ToggleButton toggleHandler={toggleHandler} />
-            )} */}
             <nav>
               <MenuItem icon={AiFillHome} label="Home" address="/dashboard" />
-
-              {/* Menu Items */}
-              {/* {role === "donor" && "donor"} */}
-              {/* {role === "volunteer" ? (toggle ? "voluteerMenu" : "donor") : ""} */}
               {role === "admin" && <AdminMenu />}
+              {role === "volunteer" && <VolunteerMenu />}
             </nav>
           </div>
         </div>

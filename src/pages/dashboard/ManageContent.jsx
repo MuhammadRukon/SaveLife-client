@@ -1,10 +1,12 @@
-import React from "react";
+import { Outlet } from "react-router-dom";
 
 const ManageContent = () => {
   return (
-    <div className="flex justify-center items-center h-screen">
-      ManageContent
-    </div>
+    <>
+      <div className="flex justify-center items-center min-h-screen ">
+        <Outlet />
+      </div>
+    </>
   );
 };
 

@@ -14,7 +14,6 @@ const Profile = () => {
     enabled: !loading,
     queryFn: async () => await axiosSecure(`/user/role/${user?.email}`),
   });
-
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -73,6 +72,8 @@ const Profile = () => {
                   isOpen={isOpen}
                   closeModal={closeModal}
                   email={user.email}
+                  data={data}
+                  isLoading={isLoading}
                 />
               </div>
             </div>
