@@ -4,6 +4,7 @@ import { useState } from "react";
 import { saveUser } from "../api/auth";
 import useAuth from "../hooks/useAuth";
 import { imageUpload } from "../api/utils";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -47,8 +48,8 @@ const SignUp = () => {
     }
 
     try {
+      // upload image and get data
       const imageData = await imageUpload(image);
-
       // create user
       const result = await createUser(email, password);
       console.log(result);
@@ -65,8 +66,10 @@ const SignUp = () => {
       };
       const saveUserDb = await saveUser(user);
       console.log(saveUserDb);
+      toast.success("successfully signed up");
     } catch (error) {
       setErrorMsg(error.message);
+      toast.error("could not sign up");
     }
     navigate("/");
   };

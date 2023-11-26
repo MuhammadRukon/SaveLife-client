@@ -9,7 +9,7 @@ import UpdateUserModal from "../../components/Modal/UpdateUserModal";
 const Profile = () => {
   const { user, loading } = useAuth();
   const [role] = useRole();
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["profile"],
     enabled: !loading,
     queryFn: async () => await axiosSecure(`/user/role/${user?.email}`),
@@ -45,7 +45,7 @@ const Profile = () => {
             Name: {user.displayName}
           </p>
           <div className="w-full p-2 mt-4 rounded-lg">
-            <div className="flex flex-wrap items-center justify-between text-sm text-gray-600 ">
+            <div className="flex flex-col lg:flex-row items-start flex-wrap gap-3  lg:items-center justify-between text-sm text-gray-600 ">
               <p className="flex flex-col">
                 Email
                 <span className="font-bold text-black ">{user.email}</span>

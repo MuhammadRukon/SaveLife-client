@@ -4,6 +4,7 @@ import { updateUser } from "../../api/auth";
 import GetLocation from "../shared/GetLocation";
 import useAuth from "../../hooks/useAuth";
 import { imageUpload } from "../../api/utils";
+import toast from "react-hot-toast";
 
 export default function UpdateUserModal({ closeModal, isOpen, email }) {
   const { updateUserProfile } = useAuth();
@@ -22,9 +23,9 @@ export default function UpdateUserModal({ closeModal, isOpen, email }) {
       // upload image
       const imageData = await imageUpload(image);
       console.log(imageData);
-      //   // update user
+      // update user
       await updateUserProfile(displayName, imageData?.data?.display_url);
-      //   // save user to database
+      // save user to database
       const user = {
         displayName,
         photoURL: imageData?.data?.display_url,
@@ -32,12 +33,15 @@ export default function UpdateUserModal({ closeModal, isOpen, email }) {
         upazila,
         bloodGroup,
       };
-      console.log(email);
-      const saveUserDb = await updateUser(user, email);
-      console.log(saveUserDb);
+      const updateUserDB = await updateUser(user, email);
+      console.log(updateUserDB);
       closeModal();
+      if (updateUserDB.modifiedCount > 0) {
+        toast.success("updated successfully");
+      }
     } catch (error) {
       console.log(error.message);
+      toast.error("could not update");
     }
   };
   return (

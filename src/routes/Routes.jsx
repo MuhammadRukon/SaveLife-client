@@ -12,6 +12,10 @@ import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../pages/dashboard/DashboardHome";
 import Profile from "../pages/dashboard/Profile";
+import ManageContent from "../pages/dashboard/ManageContent";
+import BloodDonationRequests from "../pages/dashboard/BloodDonationRequests";
+import Users from "../pages/dashboard/Users";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -54,12 +58,24 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/dashboard",
+        index: true,
         element: <DashboardHome />,
       },
       {
-        path: "/dashboard/profile",
+        path: "profile",
         element: <Profile />,
+      },
+      {
+        path: "all-users",
+        element: <Users />,
+      },
+      {
+        path: "content-management",
+        element: <ManageContent />,
+      },
+      {
+        path: "all-blood-donation-request",
+        element: <BloodDonationRequests />,
       },
     ],
   },

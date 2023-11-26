@@ -1,20 +1,16 @@
 import { useState } from "react";
 // Icons
 import { GrLogout } from "react-icons/gr";
-import { FcSettings } from "react-icons/fc";
 import { AiOutlineBars, AiFillHome } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 
 // components
 import useAuth from "../../hooks/useAuth";
-// import ToggleButton from "../ToggleButton";
 import useRole from "../../hooks/useRole";
 import Logo from "../shared/Logo";
 import MenuItem from "./MenuItem";
-import { Link } from "react-router-dom";
-// import HostMenu from "./HostMenu";
-// import GuestMenu from "./GuestMenu";
-// import AdminMenu from "./AdminMenu";
+import toast from "react-hot-toast";
+import AdminMenu from "./AdminMenu";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
@@ -73,8 +69,8 @@ const Sidebar = () => {
 
               {/* Menu Items */}
               {/* {role === "donor" && "donor"} */}
-              {role === "volunteer" ? (toggle ? "voluteerMenu" : "donor") : ""}
-              {role === "admin" && "admin"}
+              {/* {role === "volunteer" ? (toggle ? "voluteerMenu" : "donor") : ""} */}
+              {role === "admin" && <AdminMenu />}
             </nav>
           </div>
         </div>
@@ -89,7 +85,13 @@ const Sidebar = () => {
           <button className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform">
             <GrLogout className="w-5 h-5" />
 
-            <span onClick={logOut} className="mx-4 font-medium">
+            <span
+              onClick={() => {
+                logOut();
+                toast("signed out");
+              }}
+              className="mx-4 font-medium"
+            >
               Logout
             </span>
           </button>

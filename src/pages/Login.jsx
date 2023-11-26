@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { signIn } = useAuth();
@@ -15,9 +16,11 @@ const Login = () => {
     const password = e.target.password.value;
     try {
       await signIn(email, password);
+      toast.success("signed in successfully.");
       navigate(from, { replace: true });
     } catch (error) {
       setErrorMsg(error.message);
+      toast.error("could not sign in");
     }
   };
   return (

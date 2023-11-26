@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navlinks = () => {
   const { user, logOut } = useAuth();
@@ -44,6 +45,7 @@ const Navlinks = () => {
         <Link
           onClick={() => {
             logOut();
+            toast("logged out");
           }}
           className="px-4 py-3 relative lg:hover:bg-red-700 rounded-lg transition font-semibold"
         >

@@ -15,7 +15,7 @@ export const saveUser = async (user) => {
   const { data } = await axiosSecure.post("/users", currentUser);
   return data;
 };
-//save user in db
+//update user in db
 export const updateUser = async (user, email) => {
   const currentUser = {
     displayName: user.displayName,
@@ -27,9 +27,27 @@ export const updateUser = async (user, email) => {
   const { data } = await axiosSecure.put(`/user/update/${email}`, currentUser);
   return data;
 };
-
+// update user role
+export const updateUserRole = async (user, email) => {
+  const currentUser = {
+    role: user.role,
+    status: user.status,
+  };
+  const { data } = await axiosSecure.put(`/user/update/${email}`, currentUser);
+  return data;
+};
+// get users
+export const getUsers = async () => {
+  const { data } = await axiosSecure("/users");
+  return data;
+};
 // get role
 export const getRole = async (email) => {
   const { data } = await axiosSecure(`/user/role/${email}`);
   return data.role;
+};
+// get status
+export const getStatus = async (email) => {
+  const { data } = await axiosSecure(`/user/role/${email}`);
+  return data.status;
 };

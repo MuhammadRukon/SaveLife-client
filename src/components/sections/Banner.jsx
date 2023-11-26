@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Banner = () => {
+  const { user } = useAuth();
   return (
     <div
       className="hero "
@@ -20,12 +23,21 @@ const Banner = () => {
           </p>
 
           <div className="space-x-4 font-semibold text-lg mt-10">
-            <Link
-              to="/signup"
-              className="bg-red-600 w-fit px-4 rounded-md py-3 text-white"
-            >
-              !user = Join as a donor.
-            </Link>
+            {user ? (
+              <button
+                onClick={() => toast("you are already a donor")}
+                className="bg-red-600 w-fit px-4 rounded-md py-3 text-white"
+              >
+                Join as a donor
+              </button>
+            ) : (
+              <Link
+                to="/signup"
+                className="bg-red-600 w-fit px-4 rounded-md py-3 text-white"
+              >
+                Join as a donor
+              </Link>
+            )}
             <Link
               to="/search-donors"
               className="bg-red-600 w-fit px-4 rounded-md py-3 text-white"
