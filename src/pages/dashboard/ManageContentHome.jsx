@@ -3,14 +3,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getAllBlogs } from "../../api/auth";
 import BlogRow from "./BlogRow";
+import useAuth from "../../hooks/useAuth";
 
 const ManageContentHome = () => {
+  const { user } = useAuth();
   const { data: blogs, refetch } = useQuery({
+    enabled: !!user,
     queryKey: ["blogs"],
     queryFn: async () => await getAllBlogs(),
   });
   return (
-    <div>
+    <div className="px-5 2xl:px-0">
       <div className="text-right mt-14">
         <Link
           to="add-blog"

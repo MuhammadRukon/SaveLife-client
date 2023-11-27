@@ -14,7 +14,7 @@ const SignUp = () => {
   });
   const [errormsg, setErrorMsg] = useState("");
   let password;
-  const { createUser, updateUserProfile } = useAuth();
+  const { createUser, updateUserProfile, loading } = useAuth();
   const handleSignUp = async (e) => {
     e.preventDefault();
     setErrorMsg("");
@@ -22,7 +22,8 @@ const SignUp = () => {
     const image = e.target.image.files[0];
     const district = location?.district;
     const upazila = location?.upazila;
-    const email = e.target.email.value;
+    const rawEmail = e.target.email?.value;
+    const email = rawEmail?.toLowerCase();
     const bloodGroup = location?.bloodGroup;
     const firstpassword = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
@@ -165,7 +166,11 @@ const SignUp = () => {
               type="submit"
               className="bg-red-600 w-full rounded-md py-3 text-white"
             >
-              Continue
+              {loading ? (
+                <span className="loading loading-spinner loading-xs"></span>
+              ) : (
+                "Sign Up"
+              )}
             </button>
           </div>
         </form>

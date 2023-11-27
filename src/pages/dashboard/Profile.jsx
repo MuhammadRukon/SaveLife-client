@@ -10,8 +10,8 @@ const Profile = () => {
   const { user, loading } = useAuth();
   const [role] = useRole();
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["profile"],
     enabled: !loading,
+    queryKey: ["profile"],
     queryFn: async () => await axiosSecure(`/user/role/${user?.email}`),
   });
   let [isOpen, setIsOpen] = useState(false);

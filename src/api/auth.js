@@ -72,7 +72,6 @@ export const getAllBlogs = async () => {
   const { data } = await axiosSecure("/blogs");
   return data;
 };
-
 // publish/upPublish blog
 export const updateBlogStatus = async (id, status) => {
   const { data } = await axiosSecure.patch(`/blog/${id}`, status);
@@ -81,5 +80,38 @@ export const updateBlogStatus = async (id, status) => {
 // delelet blog
 export const deleteBlog = async (id) => {
   const data = axiosSecure.delete(`/blog/${id}`);
+  return data;
+};
+// add blood donation request
+export const createBloodDonationReq = async (info) => {
+  const data = await axiosSecure.post("/blood-donations", info);
+  return data;
+};
+// get donors specific blood requests
+export const getSpecificBloodRequest = async (email) => {
+  const { data } = await axiosSecure(`/blood-donations/${email}`);
+  return data;
+};
+// get donors specific recent 3 requests
+export const getRecentThreeRequests = async (email) => {
+  const { data } = await axiosSecure(`/blood-donations/recent/${email}`);
+  return data;
+};
+// get single blood donation request
+export const getSingleBloodRequest = async (id) => {
+  const { data } = await axiosSecure(`/blood-donation/${id}`);
+  return data;
+};
+// delete blood donate request
+export const deleteBloodRequest = async (id) => {
+  const { data } = await axiosSecure.delete(`/blood-donation/${id}`);
+  return data;
+};
+// update blood donate request
+export const updateBloodRequest = async (id, info) => {
+  const { data } = await axiosSecure.patch(
+    `/blood-donation/update/${id}`,
+    info
+  );
   return data;
 };

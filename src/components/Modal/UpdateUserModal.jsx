@@ -30,7 +30,7 @@ export default function UpdateUserModal({ data, closeModal, isOpen, email }) {
       console.log(imageData);
       // update user
       await updateUserProfile(displayName, imageData?.data?.display_url);
-      // save user to database
+      // updated info
       const user = {
         displayName,
         photoURL: imageData?.data?.display_url,
@@ -38,6 +38,7 @@ export default function UpdateUserModal({ data, closeModal, isOpen, email }) {
         upazila,
         bloodGroup,
       };
+      // save user to database
       const updateUserDB = await updateUser(user, email);
       console.log(updateUserDB);
       closeModal();

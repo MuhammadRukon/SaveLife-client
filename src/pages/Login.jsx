@@ -4,7 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { signIn } = useAuth();
+  const { signIn, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [errormsg, setErrorMsg] = useState("");
@@ -75,7 +75,11 @@ const Login = () => {
               type="submit"
               className="bg-red-600 w-full rounded-md py-3 text-white"
             >
-              Continue
+              {loading ? (
+                <span className="loading loading-spinner loading-xs"></span>
+              ) : (
+                "Login"
+              )}
             </button>
           </div>
         </form>

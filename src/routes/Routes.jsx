@@ -19,6 +19,11 @@ import ManageContentHome from "../pages/dashboard/ManageContentHome";
 import AddBlog from "../pages/dashboard/AddBlog";
 import AdminRoute from "./AdminRoute";
 import VolunteerRoute from "./VolunteerRoute";
+import MyDonationRequest from "../pages/dashboard/MyDonationRequest";
+import CreateDonationRequest from "../pages/dashboard/CreateDonationRequest";
+import EditDonationRequest from "../pages/dashboard/EditDonationRequest";
+import BloodDonationRequestDetails from "../pages/dashboard/BloodDonationRequestDetails";
+import axiosSecure from "../api";
 
 const router = createBrowserRouter([
   {
@@ -109,7 +114,6 @@ const router = createBrowserRouter([
             element: (
               <PrivateRoute>
                 <VolunteerRoute>
-                  {/* add  */}
                   <AddBlog />
                 </VolunteerRoute>
               </PrivateRoute>
@@ -121,9 +125,46 @@ const router = createBrowserRouter([
         path: "all-blood-donation-request",
         element: (
           <PrivateRoute>
-            <BloodDonationRequests />
+            <VolunteerRoute>
+              <BloodDonationRequests />
+            </VolunteerRoute>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "my-blood-donation-requests",
+        element: (
+          <PrivateRoute>
+            {/* donor */}
+            <MyDonationRequest />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "create-donation-request",
+        element: (
+          <PrivateRoute>
+            {/* donor */}
+            <CreateDonationRequest />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "blood-donation-request/update/:id",
+        element: (
+          <PrivateRoute>
+            <EditDonationRequest />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "blood-donation-request/details/:id",
+        element: (
+          <PrivateRoute>
+            <BloodDonationRequestDetails />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) => axiosSecure(`/blood-donation/${params.id}`),
       },
     ],
   },

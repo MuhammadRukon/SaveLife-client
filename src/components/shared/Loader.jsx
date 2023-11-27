@@ -7,7 +7,7 @@ const Loader = ({ smallHeight }) => {
       justify-center 
       items-center `}
     >
-      <span className="loading loading-infinity loading-lg"></span>
+      <span className="loading loading-infinity bg-primary loading-lg"></span>
     </div>
   );
 };

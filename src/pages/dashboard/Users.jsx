@@ -1,13 +1,16 @@
 import UserDataRow from "../../components/dashboard/table/UserDataRow";
 import { useQuery } from "@tanstack/react-query";
 import { getUsers } from "../../api/auth";
+import useAuth from "../../hooks/useAuth";
 
 const Users = () => {
+  const { user } = useAuth();
   const {
     data: loadedData,
     isLoading,
     refetch,
   } = useQuery({
+    enabled: !!user?.email,
     queryKey: ["users"],
     queryFn: async () => await getUsers(),
   });

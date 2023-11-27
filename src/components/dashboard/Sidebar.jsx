@@ -12,6 +12,7 @@ import MenuItem from "./MenuItem";
 import toast from "react-hot-toast";
 import AdminMenu from "./AdminMenu";
 import VolunteerMenu from "./VolunteerMenu";
+import DonorMenu from "./DonorMenu";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
@@ -56,6 +57,7 @@ const Sidebar = () => {
               <MenuItem icon={AiFillHome} label="Home" address="/dashboard" />
               {role === "admin" && <AdminMenu />}
               {role === "volunteer" && <VolunteerMenu />}
+              {role === "donor" && <DonorMenu />}
             </nav>
           </div>
         </div>

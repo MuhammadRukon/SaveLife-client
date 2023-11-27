@@ -19,28 +19,28 @@ const BlogRow = ({ blog, refetch }) => {
   }
 
   const content = blog.content;
-  const shortContent = content.slice(0, 100);
+  const shortContent = content.slice(0, 80);
   return (
     <tr>
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <div className="flex items-start gap-2">
+      <td className="px-2 lg:px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        <div className="flex items-start lg:gap-2">
           <div className="flex-shrink-0">
             <div className="block relative">
               <img
                 alt="profile"
                 src={blog.photoURL}
-                className="mx-auto object-cover rounded h-24 w-15 "
+                className="mx-auto object-cover rounded w-16 h-10 xl:h-24 xl:w-32 "
               />
             </div>
           </div>
           <div className="ml-3 max-w-xl">
-            <p className="text-gray-900 whitespace-no-wrap font-bold  text-lg">
+            <p className="text-gray-900 whitespace-no-wrap font-bold text-base lg:text-lg">
               {blog.title}
             </p>
-            <p className="text-gray-900 pt-2 whitespace-no-wrap">
+            <p className="text-gray-900 pt-2 text-sm lg:text-base whitespace-no-wrap">
               {isOpen ? content : shortContent}
               <span
-                className="text-blue-600 italic cursor-pointer"
+                className="text-blue-600 italic text-xs lg:text-sm cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 {" "}
@@ -50,7 +50,7 @@ const BlogRow = ({ blog, refetch }) => {
           </div>
         </div>
       </td>
-      <td className="px-5 py-5 border-b space-x-3 border-gray-200 bg-white text-sm">
+      <td className="px-1 lg:py-5 border-b space-x-3 border-gray-200 bg-white text-sm">
         <span
           className={`relative inline-block px-3 py-1 font-semibold ${
             blog?.status === "draft" || blog?.status === "unpublished"
@@ -70,7 +70,7 @@ const BlogRow = ({ blog, refetch }) => {
         </span>
       </td>
       {!isLoading && role === "admin" ? (
-        <td className="px-5 border-b space-x-3 border-gray-200 bg-white text-sm">
+        <td className="px-2 lg:px-5 border-b space-x-3 border-gray-200 bg-white text-sm">
           <div className="flex flex-col gap-2 text-center">
             {/* publish */}
             {(blog?.status === "unpublished" || blog?.status === "draft") && (

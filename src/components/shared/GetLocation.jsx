@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
-const GetLocation = ({ location, setLocation, anotherEffect }) => {
+const GetLocation = ({
+  location,
+  setLocation,
+  anotherEffect,
+  dontShowBloodInput,
+}) => {
   const [districts, setDistricts] = useState([]);
   const [upazila, setUpazila] = useState([]);
   const [effect, setEffect] = useState(false);
@@ -59,24 +64,26 @@ const GetLocation = ({ location, setLocation, anotherEffect }) => {
         </select>
       </div>
       {/* blood */}
-      <div className="w-[48%]">
-        <select
-          value={location?.bloodGroup || "Select Blood Group"}
-          className="select select-bordered w-full focus:outline-none focus:border-rose-500 max-w-xs"
-          name="bloodgroup"
-          onChange={(e) =>
-            setLocation({
-              ...location,
-              bloodGroup: e.target.value,
-            })
-          }
-        >
-          <option disabled>Select Blood Group</option>
-          {bloodGroups.map((bloodgroup, index) => (
-            <option key={index}>{bloodgroup}</option>
-          ))}
-        </select>
-      </div>
+      {!dontShowBloodInput && (
+        <div className="w-[48%]">
+          <select
+            value={location?.bloodGroup || "Select Blood Group"}
+            className="select select-bordered w-full focus:outline-none focus:border-rose-500 max-w-xs"
+            name="bloodgroup"
+            onChange={(e) =>
+              setLocation({
+                ...location,
+                bloodGroup: e.target.value,
+              })
+            }
+          >
+            <option disabled>Select Blood Group</option>
+            {bloodGroups.map((bloodgroup, index) => (
+              <option key={index}>{bloodgroup}</option>
+            ))}
+          </select>
+        </div>
+      )}
     </div>
   );
 };
