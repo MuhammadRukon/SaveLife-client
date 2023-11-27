@@ -4,7 +4,6 @@ import { PiUsersThreeFill } from "react-icons/pi";
 const VolunteerMenu = () => {
   return (
     <>
-      <MenuItem label="All users" icon={PiUsersThreeFill} address="all-users" />
       <MenuItem
         label="All Blood Donation Request"
         icon={PiUsersThreeFill}

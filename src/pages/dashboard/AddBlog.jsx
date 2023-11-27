@@ -71,7 +71,7 @@ const AddBlog = () => {
           placeholder="Write here..."
         ></textarea>
         <div className="form-control mt-6">
-          <button className="btn bg-secondary text-lg w-fit px-10 mx-auto text-white">
+          <button className="btn bg-secondary hover:bg-secondary text-lg w-fit px-10 mx-auto text-white">
             Post Blog
           </button>
         </div>

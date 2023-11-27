@@ -108,9 +108,10 @@ const router = createBrowserRouter([
             path: "add-blog",
             element: (
               <PrivateRoute>
-                <AdminRoute>
+                <VolunteerRoute>
+                  {/* add  */}
                   <AddBlog />
-                </AdminRoute>
+                </VolunteerRoute>
               </PrivateRoute>
             ),
           },

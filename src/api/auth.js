@@ -78,3 +78,8 @@ export const updateBlogStatus = async (id, status) => {
   const { data } = await axiosSecure.patch(`/blog/${id}`, status);
   return data;
 };
+// delelet blog
+export const deleteBlog = async (id) => {
+  const data = axiosSecure.delete(`/blog/${id}`);
+  return data;
+};
