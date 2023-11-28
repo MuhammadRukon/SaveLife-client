@@ -24,6 +24,7 @@ import CreateDonationRequest from "../pages/dashboard/CreateDonationRequest";
 import EditDonationRequest from "../pages/dashboard/EditDonationRequest";
 import BloodDonationRequestDetails from "../pages/dashboard/BloodDonationRequestDetails";
 import axiosSecure from "../api";
+import DonorRoute from "./DonorRoute";
 
 const router = createBrowserRouter([
   {
@@ -37,13 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/blog",
-        element: (
-          <PrivateRoute>
-            <AdminRoute>
-              <Blog />
-            </AdminRoute>
-          </PrivateRoute>
-        ),
+        element: <Blog />,
       },
       {
         path: "/search-donors",
@@ -135,8 +130,9 @@ const router = createBrowserRouter([
         path: "my-blood-donation-requests",
         element: (
           <PrivateRoute>
-            {/* donor */}
-            <MyDonationRequest />
+            <DonorRoute>
+              <MyDonationRequest />
+            </DonorRoute>
           </PrivateRoute>
         ),
       },

@@ -2,13 +2,15 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { updateBloodRequest } from "../../api/auth";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 
 const BloodDonationRequestDetails = () => {
+  const { user } = useAuth();
   const { data } = useLoaderData();
   const navigate = useNavigate();
 
   return data ? (
-    <div className="my-10 w-3/5 mx-auto lg:my-24 px-3 lg:px-5">
+    <div className="my-10 xl:w-3/5 mx-auto lg:my-24 px-4 lg:px-5">
       <h2 className="text-center font-primary xl:text-5xl">
         Blood Donation Request Details
       </h2>
@@ -22,33 +24,67 @@ const BloodDonationRequestDetails = () => {
             <strong>Requester's Name: </strong> {data.requesterName}
           </h2>
           <p className="text-lg">
-            <strong>requester's email:</strong> {data.requesterEmail}
+            <strong>Requester's email:</strong> {data.requesterEmail}
           </p>
 
           <p>
-            <strong>Address:</strong> {data.address}
+            <strong>Full Address Line:</strong> {data.address}
+          </p>
+          <p>
+            <strong>District:</strong> {data.recipientDistrict}
+          </p>
+          <p>
+            <strong>Upazila:</strong> {data.recipientUpazila}
           </p>
           <p>
             <strong>Donation Date:</strong> {data.donationDate}
+            <span className="text-xs opacity-60"> (mm-dd-yyyy)</span>
           </p>
           <p>
-            <strong>Donation Time:</strong> {data.donationTime}
+            <strong>Donation Time:</strong> {data.donationTime}{" "}
+            <span className="text-xs opacity-60">(24h)</span>
           </p>
           <p className="">
             <strong>Hospital Name:</strong> {data.hospitalName}
           </p>
-
+          <p className="">
+            <strong>Requester's Message:</strong> {data.requestMsg}
+          </p>
+          <p>
+            <strong>Requester's Message:</strong>{" "}
+            <span
+              className={`${
+                (data.donationStatus === "pending" ||
+                  data.donationStatus === "inprogress") &&
+                "bg-yellow-200 text-yellow-600"
+              } ${
+                data.donationStatus === "cancelled" && "bg-red-200 text-red-800"
+              } ${
+                data.donationStatus === "done" && "bg-green-200 text-green-800"
+              } px-2 rounded-full py-1 `}
+            >
+              {data.donationStatus}
+            </span>
+          </p>
           <button
             onClick={() =>
               Swal.fire({
                 title: "Are you sure?",
+                html:
+                  `<input class="swal-input" style="border: 1px solid gray; padding: 5px; border-radius: 8px;  width: 300px" readOnly placeholder="${user?.displayName}" />` +
+                  `<br/>` +
+                  `<input class="swal-input" style="border: 1px solid gray; padding: 5px; border-radius: 8px; width: 300px; margin-top: 20px" readOnly placeholder="${user?.email}" />`,
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#d33",
+                confirmButtonColor: "blue",
                 cancelButtonColor: "#3085d6",
                 confirmButtonText: "confirm",
               }).then(async (result) => {
-                const statusInfo = { donationStatus: "inprogress" };
+                const statusInfo = {
+                  donationStatus: "inprogress",
+                  donorName: user?.displayName,
+                  donorEmail: user?.email,
+                };
                 if (result.isConfirmed) {
                   const response = await updateBloodRequest(
                     data._id,

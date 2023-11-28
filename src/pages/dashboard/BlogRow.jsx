@@ -38,7 +38,17 @@ const BlogRow = ({ blog, refetch }) => {
               {blog.title}
             </p>
             <p className="text-gray-900 pt-2 text-sm lg:text-base whitespace-no-wrap">
-              {isOpen ? content : shortContent}
+              {isOpen ? (
+                <span
+                  className="text-gray-900 pt-2 text-sm lg:text-base whitespace-no-wrap"
+                  dangerouslySetInnerHTML={{ __html: content }}
+                />
+              ) : (
+                <span
+                  className="text-gray-900 pt-2 text-sm lg:text-base whitespace-no-wrap"
+                  dangerouslySetInnerHTML={{ __html: shortContent }}
+                />
+              )}
               <span
                 className="text-blue-600 italic text-xs lg:text-sm cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)}
@@ -69,27 +79,28 @@ const BlogRow = ({ blog, refetch }) => {
           <span className="relative">{blog.status}</span>
         </span>
       </td>
-      {!isLoading && role === "admin" ? (
+      {!isLoading && (
         <td className="px-2 lg:px-5 border-b space-x-3 border-gray-200 bg-white text-sm">
           <div className="flex flex-col gap-2 text-center">
             {/* publish */}
-            {(blog?.status === "unpublished" || blog?.status === "draft") && (
-              <>
-                <span
-                  onClick={() => {
-                    setDynamicStatus("publish");
-                    setModalIsOpen(!modalIsOpen);
-                  }}
-                  className="relative cursor-pointer inline-block px-3 py-1 font-semibold hover:scale-110 transition text-green-900 leading-tight"
-                >
+            {(blog?.status === "unpublished" || blog?.status === "draft") &&
+              role !== "volunteer" && (
+                <>
                   <span
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-green-500  rounded-md"
-                  ></span>
-                  <span className="relative ">publish</span>
-                </span>
-              </>
-            )}
+                    onClick={() => {
+                      setDynamicStatus("publish");
+                      setModalIsOpen(!modalIsOpen);
+                    }}
+                    className="relative cursor-pointer inline-block px-3 py-1 font-semibold hover:scale-110 transition text-green-900 leading-tight"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-green-500  rounded-md"
+                    ></span>
+                    <span className="relative ">publish</span>
+                  </span>
+                </>
+              )}
             {/* unpublish button */}
             {blog?.status === "published" && (
               <>
@@ -132,32 +143,30 @@ const BlogRow = ({ blog, refetch }) => {
               </span>
             </span>
             {/* delete button */}
-            <span
-              onClick={() => {
-                setModalDeleteOpen(!modalDeleteOpen);
-              }}
-              className="relative cursor-pointer inline-block px-3 py-1 font-semibold hover:scale-110 transition text-red-950d-900 leading-tight"
-            >
+            {role === "admin" && (
               <span
-                aria-hidden="true"
-                className="absolute inset-0 bg-red-400  rounded-md"
-              ></span>
-              <span className="relative flex gap-1 items-center justify-center">
-                Delete
-                <MdDeleteForever color="black" size={18} />
+                onClick={() => {
+                  setModalDeleteOpen(!modalDeleteOpen);
+                }}
+                className="relative cursor-pointer inline-block px-3 py-1 font-semibold hover:scale-110 transition text-red-950d-900 leading-tight"
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-red-400  rounded-md"
+                ></span>
+                <span className="relative flex gap-1 items-center justify-center">
+                  Delete
+                  <MdDeleteForever color="black" size={18} />
+                </span>
+                <DeleteModal
+                  isOpen={modalDeleteOpen}
+                  modalHandler={closeDeleteModal}
+                  id={blog?._id}
+                  refetch={refetch}
+                />
               </span>
-              <DeleteModal
-                isOpen={modalDeleteOpen}
-                modalHandler={closeDeleteModal}
-                id={blog?._id}
-                refetch={refetch}
-              />
-            </span>
+            )}
           </div>
-        </td>
-      ) : (
-        <td className="px-5 border-b space-x-3 border-gray-200 bg-white text-sm">
-          <button className="btn btn-disabled">actions not allowed</button>
         </td>
       )}
     </tr>

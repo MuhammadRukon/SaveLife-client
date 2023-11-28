@@ -1,12 +1,12 @@
 import { Navigate } from "react-router-dom";
 import useRole from "../hooks/useRole";
-import Loader from "../components/Shared/Loader";
+import Loader from "../components/shared/Loader";
 
-const VolunteerRoute = ({ children }) => {
+const DonorRoute = ({ children }) => {
   const [role, isLoading] = useRole();
   if (isLoading) return <Loader />;
-  if (role === "volunteer" || role === "admin") return children;
+  if (role === "donor") return children;
   return <Navigate to="/dashboard" />;
 };
 
-export default VolunteerRoute;
+export default DonorRoute;

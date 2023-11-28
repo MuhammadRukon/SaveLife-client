@@ -67,7 +67,7 @@ const GetLocation = ({
       {!dontShowBloodInput && (
         <div className="w-[48%]">
           <select
-            value={location?.bloodGroup || "Select Blood Group"}
+            value={location?.bloodGroup}
             className="select select-bordered w-full focus:outline-none focus:border-rose-500 max-w-xs"
             name="bloodgroup"
             onChange={(e) =>

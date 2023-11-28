@@ -1,15 +1,36 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Listbox, Transition } from "@headlessui/react";
 import { BsCheckLg } from "react-icons/bs";
 import { AiOutlineDown } from "react-icons/ai";
 import { updateUserRole } from "../../api/auth";
 import toast from "react-hot-toast";
-const roles = ["admin", "volunteer", "donnor"];
-const allStatus = ["active", "blocked"];
-
+const allRoles = ["admin", "volunteer", "donor"];
+const allAvailableStatus = ["active", "blocked"];
 const UpdateRoleStatusModal = ({ isOpen, modalHandler, user, refetch }) => {
+  const [roles, setRoles] = useState(allRoles);
+  const [allStatus, setAllStatus] = useState(allAvailableStatus);
   const [selected, setSelected] = useState(user.role);
   const [selectedStatus, setSelectedStatus] = useState(user.status);
+  useEffect(() => {
+    if (user.role === "volunteer") {
+      setRoles(["donor", "admin"]);
+    }
+    if (user.role === "donor") {
+      setRoles(["volunteer", "admin"]);
+    }
+    if (user.role === "admin") {
+      setRoles(["volunteer", "donor"]);
+    }
+    if (user.status === "active") {
+      setAllStatus(["block"]);
+      setSelectedStatus("active");
+    }
+    if (user.status === "blocked") {
+      setSelectedStatus("blocked");
+      setAllStatus(["unblock"]);
+    }
+    // setAllStatus(user.status === "active" ? ["block"] : ["unblock"]);
+  }, [user.status, user.role, modalHandler]);
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={modalHandler}>
@@ -189,7 +210,8 @@ const UpdateRoleStatusModal = ({ isOpen, modalHandler, user, refetch }) => {
                       // role and status info
                       const userInfo = {
                         role: selected,
-                        status: selectedStatus,
+                        status:
+                          selectedStatus === "block" ? "blocked" : "active",
                       };
                       // post to user
                       try {
@@ -199,7 +221,11 @@ const UpdateRoleStatusModal = ({ isOpen, modalHandler, user, refetch }) => {
                         );
                         if (dbResponse.modifiedCount > 0) {
                           toast.success("updated successfully");
+
                           refetch();
+                          setAllStatus(allAvailableStatus);
+
+                          setRoles(roles);
                           modalHandler();
                         } else {
                           toast("could not update");

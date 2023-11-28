@@ -75,7 +75,7 @@ const Login = () => {
               type="submit"
               className="bg-red-600 w-full rounded-md py-3 text-white"
             >
-              {loading ? (
+              {loading && !errormsg ? (
                 <span className="loading loading-spinner loading-xs"></span>
               ) : (
                 "Login"

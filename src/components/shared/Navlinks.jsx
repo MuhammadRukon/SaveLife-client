@@ -34,23 +34,26 @@ const Navlinks = () => {
       >
         Blog
       </NavLink>
-      <NavLink
-        to="/fundings"
-        className="px-4 py-3 relative lg:hover:bg-red-700  rounded-lg transition font-semibold"
-      >
-        Fundings
-      </NavLink>
 
       {user && (
-        <Link
-          onClick={() => {
-            logOut();
-            toast("logged out");
-          }}
-          className="px-4 py-3 relative lg:hover:bg-red-700 rounded-lg transition font-semibold"
-        >
-          Logout
-        </Link>
+        <>
+          {" "}
+          <NavLink
+            to="/fundings"
+            className="px-4 py-3 relative lg:hover:bg-red-700  rounded-lg transition font-semibold"
+          >
+            Fundings
+          </NavLink>
+          <Link
+            onClick={() => {
+              logOut();
+              toast("logged out");
+            }}
+            className="px-4 py-3 relative lg:hover:bg-red-700 rounded-lg transition font-semibold"
+          >
+            Logout
+          </Link>
+        </>
       )}
       {!user && (
         <>

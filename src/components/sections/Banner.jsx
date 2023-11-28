@@ -46,7 +46,7 @@ const Banner = () => {
             )}
             <Link
               to="/search-donors"
-              className="bg-red-600 w-fit px-4 rounded-md py-3 text-white"
+              className="bg-red-600 w-fit px-4 rounded-md py-[14px] text-white"
             >
               Search Donors
             </Link>

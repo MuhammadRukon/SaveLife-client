@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosSecure from ".";
 
 //save user to db
@@ -41,6 +42,13 @@ export const getUsers = async () => {
   const { data } = await axiosSecure("/users");
   return data;
 };
+// get users pagination
+export const getPaginationUsers = async (currentPage, itemsPerPage, status) => {
+  const { data } = await axiosSecure(
+    `/users/selected?page=${currentPage}&size=${itemsPerPage}&status=${status}`
+  );
+  return data;
+};
 // get role
 export const getRole = async (email) => {
   const { data } = await axiosSecure(`/user/role/${email}`);
@@ -56,6 +64,13 @@ export const getUser = async (email) => {
   const { data } = await axiosSecure(`/user/role/${email}`);
   return data;
 };
+//get donor
+export const getDonor = async (upazila, district, bloodGroup) => {
+  const { data } = await axiosSecure(
+    `/user/find-donor/${bloodGroup}?upazila=${upazila}&district=${district}`
+  );
+  return data;
+};
 // post blog
 export const postBlog = async (blogInfo) => {
   const blog = {
@@ -68,8 +83,13 @@ export const postBlog = async (blogInfo) => {
   return data;
 };
 // get all blogs
-export const getAllBlogs = async () => {
-  const { data } = await axiosSecure("/blogs");
+export const getAllBlogs = async (status) => {
+  const { data } = await axiosSecure(`/blogs?status=${status}`);
+  return data;
+};
+// get all published blogs
+export const getPublishedBlogs = async () => {
+  const { data } = await axiosSecure("/blogs/published");
   return data;
 };
 // publish/upPublish blog
@@ -88,8 +108,20 @@ export const createBloodDonationReq = async (info) => {
   return data;
 };
 // get donors specific blood requests
-export const getSpecificBloodRequest = async (email) => {
-  const { data } = await axiosSecure(`/blood-donations/${email}`);
+export const getMyAllSpecificBloodRequest = async (email) => {
+  const { data } = await axiosSecure(`/my-blood-donations/${email}`);
+  return data;
+};
+// get donors specific blood requests pagination
+export const getSpecificBloodRequest = async (
+  email,
+  currentPage,
+  itemsPerPage,
+  donationStatus
+) => {
+  const { data } = await axiosSecure(
+    `/blood-donations/${email}?page=${currentPage}&size=${itemsPerPage}&donationStatus=${donationStatus}`
+  );
   return data;
 };
 // get donors specific recent 3 requests
@@ -113,5 +145,26 @@ export const updateBloodRequest = async (id, info) => {
     `/blood-donation/update/${id}`,
     info
   );
+  return data;
+};
+//get all blood donation requests
+export const allBloodDonationRequests = async () => {
+  const { data } = await axiosSecure("/blood-donations");
+  return data;
+};
+//get blood donation requests paginations
+export const paginationBloodRequests = async (
+  currentPage,
+  itemsPerPage,
+  donationStatus
+) => {
+  const { data } = await axiosSecure(
+    `/blood-donation/selected?page=${currentPage}&size=${itemsPerPage}&donationStatus=${donationStatus}`
+  );
+  return data;
+};
+// get all  available / pending blood requests
+export const allPendingDonationRequests = async () => {
+  const { data } = await axiosSecure("/blood-donations/available/pending");
   return data;
 };

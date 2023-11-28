@@ -75,9 +75,9 @@ const CreateDonationRequest = () => {
       title: "Are you sure?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Delete",
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#FF474C",
+      confirmButtonText: "Update",
     }).then(async (result) => {
       if (result.isConfirmed) {
         const response = await updateBloodRequest(request._id, requestInfo);

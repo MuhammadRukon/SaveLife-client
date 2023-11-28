@@ -2,12 +2,18 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import GetLocation from "../../components/shared/GetLocation";
-import { createBloodDonationReq } from "../../api/auth";
+import { createBloodDonationReq, getStatus } from "../../api/auth";
 import toast from "react-hot-toast";
 import moment from "moment";
+import { useQuery } from "@tanstack/react-query";
 
 const CreateDonationRequest = () => {
   const { user, loading } = useAuth();
+  const { data: status, isLoading } = useQuery({
+    enabled: !!user,
+    queryKey: ["getStatus"],
+    queryFn: async () => await getStatus(user?.email),
+  });
   const navigate = useNavigate();
   const [location, setLocation] = useState({
     upazila: "Select Upazila",
@@ -65,7 +71,7 @@ const CreateDonationRequest = () => {
       navigate("/dashboard/my-blood-donation-requests");
     }
   };
-  return (
+  return !isLoading && status === "active" ? (
     <div className="flex justify-center items-center my-12 px-4 xl:px-0 xl:my-20 min-h-screen">
       <div className="flex flex-col 2xl:w-2/5 p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
@@ -219,6 +225,13 @@ const CreateDonationRequest = () => {
           </div>
         </form>
       </div>
+    </div>
+  ) : (
+    <div className="flex justify-center items-center h-screen">
+      <h1 className="text-4xl text-center px-4 leading-loose font-bold">
+        You are Blocked! <br />
+        Can not create donation requests.
+      </h1>
     </div>
   );
 };

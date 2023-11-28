@@ -4,16 +4,18 @@ import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { updateBloodRequest } from "../../api/auth";
+import useRole from "../../hooks/useRole";
 
 const RequestRow = ({ request, refetch }) => {
+  const [role] = useRole();
   const [isOpen, setIsOpen] = useState(false);
   const requestMsg = request.requestMsg;
   const shortrequestMsg = requestMsg.slice(0, 40);
   return (
     <tr>
-      <td className="px-2 lg:px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      <td className="px-1 md:px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <div className="flex items-start lg:gap-2">
-          <div className="ml-3 max-w-xl">
+          <div className="ml-1 md:ml-3 w-32 md:w-full  max-w-xl">
             <p className="text-gray-900 capitalize whitespace-no-wrap font-semibold text-base lg:text-lg">
               name: {request.recipientName}
             </p>
@@ -35,11 +37,11 @@ const RequestRow = ({ request, refetch }) => {
             </p>
             {request.donationStatus === "inprogress" ? (
               <>
-                <p className="text-gray-900 pt-2 text-sm font-semibold lg:text-base whitespace-no-wrap">
-                  Requester name:{request.requesterName}
+                <p className="text-gray-900 pt-2 text-sm lg:text-base italic opacity-60 whitespace-no-wrap">
+                  Donor name: {request?.donorName}
                 </p>
-                <p className="text-gray-900 text-sm font-semibold lg:text-base whitespace-no-wrap">
-                  Requester email:{request.requesterEmail}
+                <p className="text-gray-900 text-sm lg:text-base italic opacity-60   whitespace-no-wrap">
+                  Donor email: {request?.donorEmail}
                 </p>
               </>
             ) : (
@@ -48,18 +50,18 @@ const RequestRow = ({ request, refetch }) => {
           </div>
         </div>
       </td>
-      <td className="px-2 lg:px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      <td className="px-1 lg:px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <div className="flex items-start lg:gap-2">
-          <div className="ml-3 max-w-xl">
+          <div className="ml-1 md:ml-3 max-w-xl">
             <p className="text-gray-900 whitespace-no-wrap text-sm lg:text-base">
               {request?.donationDate}, {request?.donationTime}
             </p>
           </div>
         </div>
       </td>
-      <td className="px-1 lg:py-5 border-b space-x-3 border-gray-200 bg-white text-sm">
+      <td className="px-1 lg:px-5 py-5 border-b space-x-3 border-gray-200 bg-white text-sm">
         <span
-          className={`relative inline-block px-3 py-1 font-semibold ${
+          className={`relative inline-block px-2 py-1 font-semibold ${
             request?.donationStatus === "pending" ||
             request?.donationStatus === "inprogress" ||
             request?.donationStatus === "cancelled"
@@ -81,7 +83,7 @@ const RequestRow = ({ request, refetch }) => {
         </span>
       </td>
 
-      <td className="px-2 lg:px-5 border-b space-x-3 border-gray-200 bg-white text-sm">
+      <td className="px-1 md:px-5 border-b space-x-3 border-gray-200 bg-white text-sm">
         <div className="flex flex-col gap-2 text-center">
           {/* done and cancel button */}
           {request?.donationStatus === "inprogress" ? (
@@ -168,19 +170,21 @@ const RequestRow = ({ request, refetch }) => {
           ) : request?.donationStatus !== "cancelled" &&
             request?.donationStatus !== "done" ? (
             // edit button
-            <Link
-              to={`/dashboard/blood-donation-request/update/${request?._id}`}
-              className="relative cursor-pointer inline-block px-3 py-1 font-semibold hover:scale-110 transition text-secondary leading-tight"
-            >
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 bg-blue-400  rounded-md"
-              ></span>
-              <span className="relative flex items-center justify-center gap-2">
-                edit
-                <FaEdit color="black" size={12} />
-              </span>
-            </Link>
+            role !== "volunteer" && (
+              <Link
+                to={`/dashboard/blood-donation-request/update/${request?._id}`}
+                className="relative cursor-pointer inline-block px-3 py-1 font-semibold hover:scale-110 transition text-secondary leading-tight"
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-blue-400  rounded-md"
+                ></span>
+                <span className="relative flex items-center justify-center gap-2">
+                  edit
+                  <FaEdit color="black" size={12} />
+                </span>
+              </Link>
+            )
           ) : (
             ""
           )}
