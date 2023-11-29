@@ -81,7 +81,7 @@ const Users = () => {
             </select>
           </div>
 
-          <div className="-mx-4 sm:-mx-8 px-2 lg:px-8 py-4 overflow-x-auto">
+          <div className="-mx-4 sm:-mx-8 px-2 lg:px-8 py-4  overflow-scroll">
             <div className="inline-block min-w-full  drop-shadow-[0_2px_7px_rgba(0,0,0,0.10)] rounded-lg overflow-hidden">
               <table className="min-w-full leading-normal">
                 <thead>

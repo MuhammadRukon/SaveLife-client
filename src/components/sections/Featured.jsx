@@ -18,7 +18,7 @@ const Featured = () => {
       <div className="grid grid-cols-1 mt-6 lg:grid-cols-2 gap-10">
         {complete?.slice(0, 4)?.map((data) => (
           <div key={data?._id} className=" mt-10 text-left">
-            <div className="items-start relative h-80 bg-gradient-to-br from-red-300 to-red-100 gap-10 rounded-2xl pt-10 px-10 pb-4 flex-col lg:flex-row shadow-[0_3px_20px_rgba(0,0,0,0.15)]">
+            <div className="items-start relative h-full bg-gradient-to-br from-red-300 to-red-100 gap-10 rounded-2xl pt-10 px-10 pb-4 flex-col lg:flex-row shadow-[0_3px_20px_rgba(0,0,0,0.15)]">
               <div className="flex mt-2">
                 <div className="flex-1">
                   <p className="font-bold underline">Recipient</p>
@@ -40,7 +40,7 @@ const Featured = () => {
                   </h1>
                 </div>
               </div>
-              <div className="absolute bottom-8 left-[50%] -translate-x-1/2">
+              <div>
                 <div className="text-center mt-10 font-bold">
                   <p>Completion Date:{data.donationDate}</p>
                   <p>{data.hospitalName}</p>
