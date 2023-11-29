@@ -26,7 +26,11 @@ const MenuDropdown = () => {
               width="30"
             />
 
-            <p className="capitalize">{user?.displayName || "name"}</p>
+            <p className="capitalize">
+              {user?.displayName?.length > 8
+                ? user.displayName?.slice(0, 8) + ".."
+                : user?.displayName}
+            </p>
           </div>
         )}
         {/* Dropdown btn */}

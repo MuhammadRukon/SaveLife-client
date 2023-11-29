@@ -168,3 +168,22 @@ export const allPendingDonationRequests = async () => {
   const { data } = await axiosSecure("/blood-donations/available/pending");
   return data;
 };
+// get all  done / complete blood requests
+export const allCompleteDonationRequests = async () => {
+  const { data } = await axiosSecure("/blood-donations/status/done");
+  return data;
+};
+//get client secret
+export const createPaymentIntent = async (amount) => {
+  const { data } = await axiosSecure.post("/create-payment-intent", amount);
+  return data;
+};
+//save transaction info
+export const postTransactionInfo = async (info) => {
+  const { data } = await axiosSecure.post("/fundings", info);
+  return data;
+};
+export const getAllTransactionInfo = async () => {
+  const { data } = await axiosSecure("/fundings");
+  return data;
+};

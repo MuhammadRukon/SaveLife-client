@@ -1,7 +1,11 @@
 import { BiSolidDonateBlood } from "react-icons/bi";
 import { FaUsers } from "react-icons/fa";
 import { FaHandHoldingDollar } from "react-icons/fa6";
-import { allBloodDonationRequests, getUsers } from "../../../api/auth";
+import {
+  allBloodDonationRequests,
+  getAllTransactionInfo,
+  getUsers,
+} from "../../../api/auth";
 import { useQuery } from "@tanstack/react-query";
 
 const AdminHomePage = () => {
@@ -12,6 +16,10 @@ const AdminHomePage = () => {
   const { data: allRequests } = useQuery({
     queryKey: ["alldonationRequests"],
     queryFn: async () => await allBloodDonationRequests(),
+  });
+  const { data: allFundings } = useQuery({
+    queryKey: ["allfundings"],
+    queryFn: async () => await getAllTransactionInfo(),
   });
 
   return (
@@ -51,7 +59,9 @@ const AdminHomePage = () => {
           </div>
           <div className="p-4 text-right font-sans text-xl md:text-2xl font-semibold absolute bottom-0 right-0">
             <p className="text-blue-gray-600">Total Fundings</p>
-            <h4 className="text-blue-gray-900">{allUsers?.length}</h4>
+            <h4 className="text-blue-gray-900">
+              {allFundings?.reduce((acc, data) => acc + data?.amount, 0)}
+            </h4>
           </div>
         </div>
       </div>

@@ -6,10 +6,9 @@ const Logo = () => {
       <img
         src="https://i.ibb.co/5xfsNwX/logo.png"
         alt="logo"
-        width="50"
-        height="50"
+        className="w-10 h-10 lg:w-12 lg-h-12"
       />
-      <p className="text-2xl font-bold font-primary">SaveLife</p>
+      <p className="text-xl lg:text-2xl font-bold font-primary">SaveLife</p>
     </Link>
   );
 };

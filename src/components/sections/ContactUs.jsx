@@ -12,29 +12,29 @@ const ContactUs = () => {
       <h2 className="text-center font-bold font-primary my-20 text-5xl">
         Contact Us
       </h2>
-      <div className="flex items-center pb-10">
-        <div className=" p-10 w-1/2 rounded-lg">
+      <div className="flex flex-col lg:flex-row items-center pb-10">
+        <div className=" lg:p-10 lg:w-1/2 rounded-lg">
           <form onSubmit={handleSubmit} className="card-body p-0 mt-7">
-            <div className="flex flex-col md:flex-row gap-4">
-              <div className="form-control  flex-1">
+            <div className="flex flex-col md:flex-row w-full gap-4">
+              <div className="form-control  lg:w-20 flex-1">
                 <label className="label">
                   <span className="label-text">First Name</span>
                 </label>
                 <input
                   type="text"
                   placeholder="first name"
-                  className="input rounded-r-none rounded-b-none input-bordered focus:outline-none"
+                  className="input md:rounded-r-none md:rounded-b-none input-bordered focus:outline-none"
                   required
                 />
               </div>
-              <div className="form-control flex-1">
+              <div className="form-control lg:w-20 flex-1">
                 <label className="label">
                   <span className="label-text">Last Name</span>
                 </label>
                 <input
                   type="text"
                   placeholder="last name"
-                  className="input rounded-l-none rounded-b-none  input-bordered focus:outline-none"
+                  className="input md:rounded-l-none md:rounded-b-none  input-bordered focus:outline-none"
                   required
                 />
               </div>
@@ -46,7 +46,7 @@ const ContactUs = () => {
               <input
                 type="email"
                 placeholder="email"
-                className="input input-bordered rounded-none focus:outline-none"
+                className="input input-bordered md:rounded-none focus:outline-none"
                 required
               />
             </div>
@@ -62,19 +62,19 @@ const ContactUs = () => {
             </div>
           </form>
         </div>
-        <div className="divider  my-auto  lg:divider-horizontal">OR</div>
-        <div className="ml-20 space-y-14">
+        <div className="divider my-10  lg:divider-horizontal">OR</div>
+        <div className="lg:ml-20 space-y-6 lg:space-y-14">
           <div className="flex items-center gap-3">
             <div className="animate-bounce">
               <SiGmail size={24} />
             </div>
-            <p className=" text-2xl ">muhammad.rukon242@gmail.com</p>
+            <p className="text-lg xl:text-2xl">muhammad.rukon242@gmail.com</p>
           </div>
           <div className="flex items-center gap-3">
             <div className="animate-bounce">
               <FaPhoneAlt size={24} />
             </div>{" "}
-            <p className=" text-2xl ">+8801815780053</p>
+            <p className="text-lg xl:text-2xl">+8801815780053</p>
           </div>
 
           <div className="flex items-center gap-3">
@@ -82,7 +82,7 @@ const ContactUs = () => {
               <FaLinkedin size={24} />
             </div>
             <a
-              className=" text-2xl underline italic"
+              className="text-lg xl:text-2xl underline italic"
               href="https://www.linkedin.com/in/muhammadrukon/"
             >
               Linkedin
@@ -92,7 +92,7 @@ const ContactUs = () => {
             <div className="animate-bounce">
               <FaMapLocationDot size={24} />
             </div>
-            <p className=" text-2xl ">Hazaribagh, Dhaka, Bangladesh</p>
+            <p className="text-lg xl:text-2xl">Hazaribagh, Dhaka, Bangladesh</p>
           </div>
         </div>
       </div>

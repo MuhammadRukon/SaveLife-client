@@ -34,12 +34,12 @@ const SearchDonor = () => {
     <Container>
       <div className="text-center">
         <h2 className=" mt-16 text-3xl mb-10 lg:text-5xl">Search Donors</h2>
-        <div className="w-1/3 relative mx-auto">
+        <div className="w-4/5 lg:w-1/3 relative mx-auto">
           <GetLocation location={location} setLocation={setLocation} />
 
           <span
             onClick={handleSearch}
-            className="btn absolute  bottom-0 right-0 bg-primary hover:bg-primary text-white px-[68px] text-lg mt-5"
+            className="btn absolute  bottom-0 right-0 bg-primary hover:bg-primary text-white px-[50px] xl:px-[68px] text-lg mt-5"
           >
             Search
           </span>
@@ -47,24 +47,24 @@ const SearchDonor = () => {
 
         {loadedData?.map((data) => (
           <div key={data?._id} className="hero mt-10 text-left">
-            <div className="hero-content items-start gap-10 rounded-2xl max-w-[1180px] p-5 md:p-10 flex-col lg:flex-row shadow-[0_3px_20px_rgba(0,0,0,0.15)]">
+            <div className="hero-content items-start gap-10 rounded-2xl max-w-2xl p-5 md:p-10 flex-col lg:flex-row shadow-[0_3px_20px_rgba(0,0,0,0.15)]">
               <div className="xl:w-2/5 bg-black rounded-xl overflow-hidden">
                 <img src={data?.photoURL} className="opacity-70" alt="" />
               </div>
               <div className="w-3/5">
-                <h1 className="text-3xl capitalize md:text-4xl font-bold mt-8">
+                <h1 className="text-2xl capitalize md:text-4xl font-bold">
                   Name: {data?.displayName}
                 </h1>
-                <h1 className="text-xl md:text-3xl mt-8">
+                <h1 className="text-lg md:text-2xl mt-4">
                   Location: {data?.upazila}, {data?.district}
                 </h1>
-                <h1 className="text-xl md:text-3xl mt-8">
+                <h1 className="text-lg md:text-2xl mt-4">
                   Blood Group: {data?.bloodGroup}
                 </h1>
-                <h1 className="text-xl md:text-3xl mt-8">
+                <h1 className="text-lg md:text-2xl my-4">
                   Status:{" "}
                   <span
-                    className={`bg-black capitalize px-4 py-1 rounded-full ${
+                    className={`bg-black capitalize px-3 py-[2px] rounded-full ${
                       data?.status === "active"
                         ? "bg-green-400 text-green-900"
                         : "bg-red-400 text-red-900"
