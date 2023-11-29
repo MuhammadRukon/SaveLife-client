@@ -6,7 +6,13 @@ import useAuth from "../../hooks/useAuth";
 import { imageUpload } from "../../api/utils";
 import toast from "react-hot-toast";
 
-export default function UpdateUserModal({ data, closeModal, isOpen, email }) {
+export default function UpdateUserModal({
+  data,
+  closeModal,
+  isOpen,
+  email,
+  refetch,
+}) {
   const { updateUserProfile } = useAuth();
 
   const [location, setLocation] = useState({
@@ -44,6 +50,8 @@ export default function UpdateUserModal({ data, closeModal, isOpen, email }) {
       closeModal();
       if (updateUserDB.modifiedCount > 0) {
         toast.success("updated successfully");
+        //refetch
+        refetch();
       }
     } catch (error) {
       console.log(error.message);
@@ -99,6 +107,7 @@ export default function UpdateUserModal({ data, closeModal, isOpen, email }) {
                           type="text"
                           name="name"
                           id="name"
+                          required
                           defaultValue={data?.data?.displayName}
                           placeholder="Enter Your Name Here"
                           className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"

@@ -7,7 +7,6 @@ const Featured = () => {
     queryKey: ["completeDonations"],
     queryFn: async () => await allCompleteDonationRequests(),
   });
-  console.log(complete);
   return (
     <div>
       <h2 className="text-center font-bold font-primary mt-20 text-5xl">
@@ -16,11 +15,11 @@ const Featured = () => {
       <p className="text-center mt-6 italic tracking-widest">
         Successful blood donations through SaveLife
       </p>
-      <div className="grid grid-cols-1 mt-6 lg:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 mt-6 lg:grid-cols-2 gap-10">
         {complete?.slice(0, 4)?.map((data) => (
           <div key={data?._id} className=" mt-10 text-left">
-            <div className="items-start bg-gradient-to-br from-red-300 to-red-100 gap-10 rounded-2xl pt-10 px-10 pb-4 flex-col lg:flex-row shadow-[0_3px_20px_rgba(0,0,0,0.15)]">
-              <div className="flex">
+            <div className="items-start relative h-80 bg-gradient-to-br from-red-300 to-red-100 gap-10 rounded-2xl pt-10 px-10 pb-4 flex-col lg:flex-row shadow-[0_3px_20px_rgba(0,0,0,0.15)]">
+              <div className="flex mt-2">
                 <div className="flex-1">
                   <p className="font-bold underline">Recipient</p>
                   <h1 className="text-lg capitalize md:text-2xl font-bold">
@@ -41,15 +40,17 @@ const Featured = () => {
                   </h1>
                 </div>
               </div>
-              <div className="text-center mt-10 font-bold">
-                <p>Completion Date:{data.donationDate}</p>
-                <p>{data.hospitalName}</p>
-              </div>
-              <div className="text-center mt-4 leading-5 opacity-50 italic">
-                <p>
-                  Requested:{data.requesterName} <br />
-                  {data.requesterEmail}
-                </p>
+              <div className="absolute bottom-8 left-[50%] -translate-x-1/2">
+                <div className="text-center mt-10 font-bold">
+                  <p>Completion Date:{data.donationDate}</p>
+                  <p>{data.hospitalName}</p>
+                </div>
+                <div className="text-center mt-4 leading-5 opacity-50 italic">
+                  <p>
+                    Requested:{data.requesterName} <br />
+                    {data.requesterEmail}
+                  </p>
+                </div>
               </div>
             </div>
           </div>

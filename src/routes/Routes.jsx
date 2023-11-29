@@ -160,7 +160,7 @@ const router = createBrowserRouter([
             <BloodDonationRequestDetails />
           </PrivateRoute>
         ),
-        loader: ({ params }) => axiosSecure(`/blood-donation/${params.id}`),
+        // loader: ({ params }) => axiosSecure(`/blood-donation/${params.id}`),
       },
     ],
   },

@@ -6,6 +6,7 @@ import { getDonor } from "../api/auth";
 
 const SearchDonor = () => {
   const [loadedData, setLoadedData] = useState([]);
+  const [text, setText] = useState("");
   const [effect, setEffect] = useState(false);
   const [location, setLocation] = useState({
     upazila: "Select Upazila",
@@ -22,6 +23,9 @@ const SearchDonor = () => {
           location.bloodGroup
         );
         setLoadedData(data);
+        if (data.length) {
+          setText("Found");
+        } else setText("No Donors found, try with different data");
       } catch (error) {}
     };
     fetchData();
@@ -29,6 +33,7 @@ const SearchDonor = () => {
 
   const handleSearch = () => {
     setEffect(!effect);
+    setText("searching");
   };
   return (
     <Container>
@@ -77,6 +82,9 @@ const SearchDonor = () => {
             </div>
           </div>
         ))}
+        {!loadedData.length && (
+          <h1 className=" mt-16 text-3xl mb-10 lg:text-5xl">{text}</h1>
+        )}
       </div>
     </Container>
   );

@@ -105,12 +105,12 @@ const RequestRow = ({ request, refetch }) => {
                         statusInfo
                       );
                       if (response.modifiedCount > 0) {
+                        refetch();
                         Swal.fire({
                           title: "Updated",
                           text: "Blood Donation Request updated.",
                           icon: "success",
                         });
-                        refetch();
                       } else {
                         toast.error("could not update");
                       }
@@ -144,12 +144,12 @@ const RequestRow = ({ request, refetch }) => {
                         statusInfo
                       );
                       if (response.modifiedCount > 0) {
+                        refetch();
                         Swal.fire({
                           title: "Updated",
                           text: "Blood Donation Request updated.",
                           icon: "success",
                         });
-                        refetch();
                       } else {
                         toast.error("could not update");
                       }

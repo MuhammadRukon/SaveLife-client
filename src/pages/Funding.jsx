@@ -86,23 +86,23 @@ const Funding = () => {
         />
       </div>
       {/* fund donors */}
-      <div className="-mx-4 sm:-mx-8 px-2 mt-14 lg:px-8 py-4 overflow-x-auto">
-        <h1 className="text-center mb-10 text-3xl lg:text-5xl font-bold font-primary capitalize">
+      <div className="">
+        <h1 className="text-center mt-10 mb-10 text-3xl  lg:text-5xl font-bold font-primary capitalize">
           Our Honorable Donors
         </h1>
-        <div className="inline-block min-w-full  drop-shadow-[0_2px_7px_rgba(0,0,0,0.10)] rounded-lg overflow-hidden">
-          <table className="min-w-full leading-normal">
+        <div className="drop-shadow-[0_2px_7px_rgba(0,0,0,0.10)]  flex justify-center rounded-lg">
+          <table className="w-full">
             <thead>
               <tr>
                 <th
                   scope="col"
-                  className="px-4 lg:px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                  className="px-2 lg:px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                 >
                   Image
                 </th>
                 <th
                   scope="col"
-                  className="px-4 lg:px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                  className="px-2 lg:px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                 >
                   Name
                 </th>
@@ -120,7 +120,7 @@ const Funding = () => {
                 </th>
                 <th
                   scope="col"
-                  className="px-4 lg:px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                  className="px-2 lg:px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                 >
                   Date
                 </th>

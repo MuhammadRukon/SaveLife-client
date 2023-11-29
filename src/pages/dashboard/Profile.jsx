@@ -10,7 +10,7 @@ const Profile = () => {
   const { user, loading } = useAuth();
   const [role] = useRole();
   const { data, isLoading, refetch } = useQuery({
-    enabled: !loading,
+    enabled: !!user,
     queryKey: ["profile"],
     queryFn: async () => await axiosSecure(`/user/role/${user?.email}`),
   });
@@ -21,7 +21,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center my-20 lg:my-20 items-center h-screen">
       <div className="bg-white shadow-lg rounded-2xl w-3/5">
         <img
           alt="profile"
@@ -63,7 +63,10 @@ const Profile = () => {
               </p>
               <div>
                 <button
-                  onClick={() => setIsOpen(true)}
+                  onClick={() => {
+                    setIsOpen(true);
+                    refetch();
+                  }}
                   className="bg-primary px-10 py-2 rounded-lg text-white -mb-1 cursor-pointer block"
                 >
                   Update Profile
@@ -74,6 +77,7 @@ const Profile = () => {
                   email={user.email}
                   data={data}
                   isLoading={isLoading}
+                  refetch={refetch}
                 />
               </div>
             </div>

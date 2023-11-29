@@ -3,8 +3,8 @@ import { postBlog } from "../../api/auth";
 import { imageUpload } from "../../api/utils";
 import { useNavigate } from "react-router-dom";
 import JoditEditor from "jodit-react";
-import React, { useState, useRef, useMemo, useEffect } from "react";
-import HTMLReactParser from "html-react-parser";
+import React, { useState, useRef } from "react";
+
 const AddBlog = () => {
   const [content, setContent] = useState("");
   const navigate = useNavigate();
@@ -13,6 +13,10 @@ const AddBlog = () => {
     e.preventDefault();
     const title = e.target.title.value;
     const image = e.target.image.files[0];
+    if (content?.length < 1) {
+      toast.error("empty content");
+      return;
+    }
     try {
       const imageData = await imageUpload(image);
       const photoURL = imageData?.data?.display_url;
@@ -70,22 +74,16 @@ const AddBlog = () => {
           </div>
         </div>
         <span className="label-text mt-6">Content</span>
-        {/* <textarea
-          name="content"
-          className="textarea h-[200px] textarea-bordered resize-none focus:outline-none"
-          placeholder="Write here..."
-        ></textarea> */}
+
         <JoditEditor
           ref={editor}
           height={800}
           value={content}
-          tabIndex={1} // tabIndex of textarea
-          // preferred to use only this option to update the content for performance reasons
+          tabIndex={1}
           onChange={(newContent) => {
             setContent(newContent);
           }}
         />
-        <p>{content}</p>
         <div className="form-control mt-6">
           <button className="btn bg-secondary hover:bg-secondary text-lg w-fit px-10 mx-auto text-white">
             Post Blog

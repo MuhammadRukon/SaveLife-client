@@ -1,17 +1,28 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
-import { updateBloodRequest } from "../../api/auth";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import {
+  getSingleBloodRequest,
+  getSpecificBloodRequest,
+  updateBloodRequest,
+} from "../../api/auth";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
 
 const BloodDonationRequestDetails = () => {
   const { user } = useAuth();
-  const { data } = useLoaderData();
+  const { id } = useParams();
+  console.log(id);
+  const { data, isLoading, refetch } = useQuery({
+    enabled: !!user && !!id,
+    queryKey: ["DonationDetails"],
+    queryFn: async () => await getSingleBloodRequest(id),
+  });
+  // const { data } = useLoaderData();
   const navigate = useNavigate();
-
   return data ? (
-    <div className="my-10 xl:w-3/5 mx-auto lg:my-24 px-4 lg:px-5">
-      <h2 className="text-center font-primary xl:text-5xl">
+    <div className="py-10 xl:w-3/5 mx-auto lg:py-24 px-4 lg:px-5">
+      <h2 className="text-center font-primary text-3xl xl:text-5xl">
         Blood Donation Request Details
       </h2>
 

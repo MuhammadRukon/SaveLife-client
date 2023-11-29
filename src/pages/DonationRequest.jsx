@@ -17,12 +17,15 @@ const DonationRequest = () => {
   });
   return (
     <>
-      <h2 className="text-center mt-20 font-primary xl:text-5xl">
+      <h2 className="text-center mt-20 font-primary text-3xl mb-10 xl:text-5xl">
         Blood Donation Request Details
       </h2>
 
-      {pendingRequests?.map((data) => (
-        <div className=" xl:w-3/5 mx-auto lg:my-16 px-4 lg:px-5">
+      {pendingRequests?.map((data, index) => (
+        <div
+          key={index}
+          className=" xl:w-3/5 mx-auto my-8 lg:my-16 px-4 lg:px-5"
+        >
           <div className=" rounded-lg shadow-[0_0_20px_rgba(0,0,0,0.15)]">
             <div className="p-8 py-10 space-y-3  font-semibold flex flex-col justify-between flex-1">
               <h2 className="mb-5 2xl:mb-0 text-3xl capitalize font-semibold">

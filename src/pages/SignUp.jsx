@@ -11,6 +11,7 @@ const SignUp = () => {
   const [location, setLocation] = useState({
     upazila: "Select Upazila",
     district: "Select District",
+    bloodGroup: "Select Blood Group",
   });
   const [errormsg, setErrorMsg] = useState("");
   let password;
@@ -18,6 +19,7 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     setErrorMsg("");
+
     const displayName = e.target.name.value;
     const image = e.target.image.files[0];
     const district = location?.district;
@@ -27,33 +29,66 @@ const SignUp = () => {
     const bloodGroup = location?.bloodGroup;
     const firstpassword = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
+    if (!displayName) {
+      toast.error("Enter valid name");
 
+      return;
+    }
+    if (!image) {
+      toast.error("Enter an Image");
+
+      return;
+    }
+    if (district === "" || district === "Select District") {
+      toast.error("select valid district");
+
+      return;
+    }
+
+    if (upazila === "" || upazila === "Select Upazila") {
+      toast.error("select valid upazila");
+
+      return;
+    }
+    if (bloodGroup === "" || bloodGroup === "Select Blood Group") {
+      toast.error("select valid blood group");
+
+      return;
+    }
     if (firstpassword === confirmPassword) {
       password = firstpassword || confirmPassword;
     } else {
       setErrorMsg("password doesn't match");
+
       return;
     }
     if (password.length < 6) {
       setErrorMsg("Password needs to be at least six characters");
+
       return;
     }
 
     if (!/.*[A-Z].*/.test(password)) {
       setErrorMsg("Password needs at least one capital letter");
+
       return;
     }
     if (!/.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?].*/.test(password)) {
       setErrorMsg("Password needs at least one special character");
+
       return;
     }
 
     try {
       // upload image and get data
+
       const imageData = await imageUpload(image);
+
       // create user
+
       const result = await createUser(email, password);
       console.log(result);
+
       // update user
       await updateUserProfile(displayName, imageData?.data?.display_url);
       // save user to database
@@ -71,7 +106,9 @@ const SignUp = () => {
     } catch (error) {
       setErrorMsg(error.message);
       toast.error("could not sign up");
+      navigate("/signup");
     }
+
     navigate("/");
   };
   return (
@@ -83,6 +120,7 @@ const SignUp = () => {
         </div>
         <form
           onSubmit={handleSignUp}
+          onChange={(e) => setValid(true)}
           noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
@@ -96,6 +134,7 @@ const SignUp = () => {
                 type="text"
                 name="name"
                 id="name"
+                required
                 placeholder="Enter Your Name Here"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"

@@ -4,13 +4,12 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
-  sendPasswordResetEmail,
   signInWithEmailAndPassword,
-  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
 import { app } from "../config/firebase.config";
+import axiosSecure from "../api";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -30,11 +29,6 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // const resetPassword = (email) => {
-  //   setLoading(true);
-  //   return sendPasswordResetEmail(auth, email);
-  // };
-
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
@@ -53,6 +47,22 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       console.log("CurrentUser-->", currentUser);
       setLoading(false);
+
+      const userEmail = currentUser?.email || user?.email;
+      const loggedUser = { email: userEmail };
+      //issue token
+      if (currentUser) {
+        axiosSecure
+          .post("/jwt", loggedUser)
+          .then((res) => console.log(res.data))
+          .catch((error) => console.log(error));
+      }
+      //remove token
+      else {
+        axiosSecure
+          .post("/logout", loggedUser)
+          .then((res) => console.log(res.data));
+      }
     });
     return () => {
       return unsubscribe();

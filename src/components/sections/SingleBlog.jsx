@@ -15,10 +15,10 @@ const SingleBlog = ({ data, index }) => {
     <>
       <div className="hero  ">
         <div className="hero-content  items-start gap-10 rounded-2xl max-w-[1180px] p-5 md:p-10 flex-col lg:flex-row shadow-[0_3px_20px_rgba(0,0,0,0.15)]">
-          <div className="xl:w-2/5 bg-black rounded-xl overflow-hidden">
+          <div className="xl:w-2/5 mx-auto bg-black rounded-xl overflow-hidden">
             <img src={photoURL} className="opacity-70" alt="" />
           </div>
-          <div className="w-3/5 relative">
+          <div className="lg:w-3/5 relative">
             <h1 className="text-xl  md:text-2xl font-semibold">
               Blog No: {index + 1}
             </h1>

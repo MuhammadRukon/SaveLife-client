@@ -42,7 +42,14 @@ const CreateDonationRequest = () => {
       toast.error("can not select past time.");
       return;
     }
-
+    if (recipientDistrict === "Select District" || recipientDistrict === "") {
+      toast.error("select value district");
+      return;
+    }
+    if (recipientUpazila === "Select Upazila" || recipientUpazila === "") {
+      toast.error("select value upazila");
+      return;
+    }
     try {
       //   post object
       const requestInfo = {
@@ -72,7 +79,7 @@ const CreateDonationRequest = () => {
     }
   };
   return !isLoading && status === "active" ? (
-    <div className="flex justify-center items-center my-12 px-4 xl:px-0 xl:my-20 min-h-screen">
+    <div className="flex justify-center items-center py-12 px-4 xl:px-0 xl:py-20 min-h-screen">
       <div className="flex flex-col 2xl:w-2/5 p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Create Donation Request</h1>
@@ -95,7 +102,6 @@ const CreateDonationRequest = () => {
                 type="text"
                 name="requesterName"
                 id="requesterName"
-                required
                 defaultValue={user?.displayName}
                 className="text-gray-400 cursor-default focus:outline-none w-full px-3 py-2 border rounded-md  bg-gray-200"
                 data-temp-mail-org="0"
@@ -112,7 +118,6 @@ const CreateDonationRequest = () => {
               <input
                 type="email"
                 name="requesterEmail"
-                required
                 id="requesterEmail"
                 defaultValue={user?.email}
                 className="text-gray-400 cursor-default focus:outline-none w-full px-3 py-2 border rounded-md  bg-gray-200"

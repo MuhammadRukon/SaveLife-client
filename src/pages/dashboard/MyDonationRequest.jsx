@@ -85,7 +85,7 @@ const MyDonationRequest = () => {
             <option disabled>all</option>
             <option value="pending">pending</option>
             <option value="done">done</option>
-            <option value="pending">inprogress</option>
+            <option value="inprogress">inprogress</option>
             <option value="cancelled">cancelled</option>
           </select>
         </div>
@@ -131,11 +131,12 @@ const MyDonationRequest = () => {
           </table>
         ) : (
           <h2 className="text-4xl mt-10 font-semibold">
-            No Donation requests yet!
+            No Donation requests!
           </h2>
         )}
       </div>
-      {myDonations?.length && (
+
+      {myDonations?.length ? (
         <div className="py-10 text-center">
           <button onClick={handlePreviousPage} className="btn mr-1">
             ←prev
@@ -169,6 +170,8 @@ const MyDonationRequest = () => {
             <option value="5">5</option>
           </select>
         </div>
+      ) : (
+        ""
       )}
     </>
   );

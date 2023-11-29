@@ -1,4 +1,3 @@
-import axios from "axios";
 import axiosSecure from ".";
 
 //save user to db
