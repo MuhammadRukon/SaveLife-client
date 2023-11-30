@@ -24,7 +24,7 @@ const Banner = () => {
             Your donation can save a life.
           </p>
 
-          <div className="space-x-4 font-semibold text-lg mt-10">
+          <div className="flex gap-4 flex-col sm:flex-row justify-center items-center font-semibold text-lg mt-10">
             {user ? (
               <button
                 onClick={() =>
@@ -32,21 +32,21 @@ const Banner = () => {
                     `you are already ${role === "admin" ? "an" : "a"} ${role}`
                   )
                 }
-                className="bg-red-600 w-fit px-4 rounded-md py-3 text-white"
+                className="bg-red-600 w-fit  px-2 md:px-4 rounded-md py-2 md:py-3 text-white"
               >
                 Join as a donor
               </button>
             ) : (
               <Link
                 to="/signup"
-                className="bg-red-600 w-fit px-4 rounded-md py-3 text-white"
+                className="bg-red-600 w-fit px-2 md:px-4 rounded-md py-2 md:py-3 text-white"
               >
                 Join as a donor
               </Link>
             )}
             <Link
               to="/search-donors"
-              className="bg-red-600 w-fit px-4 rounded-md py-[14px] text-white"
+              className="bg-red-600 w-fit px-2 md:px-4 rounded-md py-[10px] md:py-[12px] text-white"
             >
               Search Donors
             </Link>
