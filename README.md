@@ -64,6 +64,6 @@ Some of the functionality and feature of this website are:
 
 **Live Link:**
 
-[![Link]()](https://savelife-6b7c9.web.app)
+[![Link]](https://savelife-6b7c9.web.app)
 
 admin acc: savelife@admin.com-email&password
