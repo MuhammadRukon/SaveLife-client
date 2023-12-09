@@ -63,7 +63,6 @@ Some of the functionality and feature of this website are:
 - Contact form and number for inquiries.
 
 **Live Link:**
-
-(https://savelife-6b7c9.web.app)
+[SaveLife](https://savelife-6b7c9.web.app)
 
 admin acc: savelife@admin.com-email&password
