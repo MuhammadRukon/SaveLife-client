@@ -63,7 +63,7 @@ Some of the functionality and feature of this website are:
 - Contact form and number for inquiries.
 
 **Tech-stack:**
-React js, express js, mongodb and firebase.
+React js, express js, mongoose and firebase.
 
 **Live Link:**
 [SaveLife](https://savelife-6b7c9.web.app)
