@@ -136,7 +136,7 @@ export default function UpdateUserModal({
                     <div className="flex gap-2">
                       <button
                         type="submit"
-                        className="bg-red-600 w-full rounded-md py-3 text-white"
+                        className="bg-primary w-full rounded-md py-3 text-white"
                       >
                         Continue
                       </button>

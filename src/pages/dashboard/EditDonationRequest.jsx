@@ -295,7 +295,7 @@ const CreateDonationRequest = () => {
               </Link>
               <span
                 onClick={handleDelete}
-                className="bg-red-600 cursor-pointer text-center w-full rounded-md py-3 text-white"
+                className="bg-primary cursor-pointer text-center w-full rounded-md py-3 text-white"
               >
                 {loading ? (
                   <span className="loading loading-spinner loading-xs"></span>

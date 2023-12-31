@@ -35,7 +35,7 @@ const ErrorPage = () => {
               <span>Go back</span>
             </button>
 
-            <Link className="px-3 bg-red-600 text-white rounded-lg py-2">
+            <Link className="px-3 bg-primary text-white rounded-lg py-2">
               Take me home
             </Link>
           </div>

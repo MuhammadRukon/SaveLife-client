@@ -9,6 +9,7 @@ export default {
       },
       fontFamily: {
         primary: "'Roboto Slab', serif",
+        satisfy: "'Satisfy', cursive",
       },
     },
   },

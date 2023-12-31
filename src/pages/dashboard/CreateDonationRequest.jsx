@@ -219,7 +219,7 @@ const CreateDonationRequest = () => {
           <div>
             <button
               type="submit"
-              className="bg-red-600 w-full rounded-md py-3 text-white"
+              className="bg-primary w-full rounded-md py-3 text-white"
             >
               {loading ? (
                 <span className="loading loading-spinner loading-xs"></span>

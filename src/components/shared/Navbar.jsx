@@ -4,7 +4,7 @@ import MenuDropdown from "./MenuDropdown";
 
 const Navbar = () => {
   return (
-    <div className="fixed w-full bg-red-600 z-10 text-white shadow-sm">
+    <div className="fixed w-full bg-primary z-10 text-white shadow-sm">
       <div className="py-4 ">
         {/* border-b-[1px] */}
         <Container>

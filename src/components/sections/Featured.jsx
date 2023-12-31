@@ -18,24 +18,24 @@ const Featured = () => {
       <div className="grid grid-cols-1 mt-6 lg:grid-cols-2 gap-10">
         {complete?.slice(0, 4)?.map((data) => (
           <div key={data?._id} className=" mt-10 text-left">
-            <div className="items-start relative h-full bg-gradient-to-br from-red-300 to-red-100 gap-10 rounded-2xl pt-10 px-10 pb-4 flex-col lg:flex-row shadow-[0_3px_20px_rgba(0,0,0,0.15)]">
+            <div className="items-start relative h-full gap-10 rounded-2xl pt-10 px-10 pb-4 flex-col lg:flex-row shadow-[0_3px_20px_rgba(0,0,0,0.15)]">
               <div className="flex mt-2">
                 <div className="flex-1">
-                  <p className="font-bold underline">Recipient</p>
-                  <h1 className="text-lg capitalize md:text-2xl font-bold">
+                  <p className="font-semibold underline">Recipient</p>
+                  <h1 className="text-lg capitalize md:text-xl font-bold">
                     {data?.recipientName}
                   </h1>
-                  <h1 className="text-lg md:text-lg mt-1">
+                  <h1 className="text-sm md:text-base mt-1">
                     from: {data?.recipientDistrict}
                   </h1>
                 </div>
                 <div className="divider  my-auto  lg:divider-horizontal"></div>
                 <div className="text-right flex-1">
                   <p className="font-bold underline">Donor</p>
-                  <h1 className="text-lg capitalize md:text-2xl font-bold">
+                  <h1 className="text-lg capitalize md:text-xl font-bold">
                     {data?.donorName}
                   </h1>
-                  <h1 className="text-lg md:text-lg mt-1">
+                  <h1 className="text-sm md:text-base mt-1">
                     {data?.donorEmail}
                   </h1>
                 </div>
