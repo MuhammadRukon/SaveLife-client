@@ -8,7 +8,7 @@ export default {
         secondary: "#022E4B",
       },
       fontFamily: {
-        primary: "'Roboto Slab', serif",
+        primary: "'Outfit', san-serif",
         satisfy: "'Satisfy', cursive",
       },
     },

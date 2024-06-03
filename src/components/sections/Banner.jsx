@@ -32,21 +32,21 @@ const Banner = () => {
                     `you are already ${role === "admin" ? "an" : "a"} ${role}`
                   )
                 }
-                className="bg-primary w-fit hover:scale-110 transition-all px-2 md:px-4 rounded-md py-2 md:py-3 text-white"
+                className="bg-primary w-fit hover:scale-105 transition-all px-2 md:px-4 rounded-md py-2 md:py-3 text-white"
               >
                 Join as a donor
               </button>
             ) : (
               <Link
                 to="/signup"
-                className="bg-primary w-fit px-2 md:px-4 rounded-md py-2 md:py-3 text-white"
+                className="bg-primary w-fit px-2 hover:scale-105 transition-all md:px-4 rounded-md py-2 md:py-3 text-white"
               >
                 Join as a donor
               </Link>
             )}
             <Link
               to="/search-donors"
-              className="bg-primary hover:scale-110 transition-all w-fit px-2 md:px-4 rounded-md py-[10px] md:py-[12px] text-white"
+              className="bg-primary hover:scale-105 transition-all w-fit px-2 md:px-4 rounded-md py-[10px] md:py-[12px] text-white"
             >
               Search Donors
             </Link>

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { allCompleteDonationRequests } from "../../api/auth";
-
+console.log(import.meta.env.VITE_PAYMENT_GATEWAY_KEY);
 const Featured = () => {
   const { data: complete, isLoading } = useQuery({
     queryKey: ["completeDonations"],
