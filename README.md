@@ -68,4 +68,4 @@ React js, express js, mongoose and firebase.
 **Live Link:**
 [SaveLife](https://savelife-6b7c9.web.app)
 
-admin acc: savelife@admin.com-email&password
+admin email & password: savelife@admin.com
